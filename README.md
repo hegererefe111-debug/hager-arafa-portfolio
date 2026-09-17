@@ -1,30 +1,20 @@
-# Hager Arafa Portfolio
+# Hager Arafa — Portfolio
 
-A responsive portfolio website for Hager Arafa — Junior Data Engineer.
+A responsive editorial portfolio for Hager Arafa, Junior Data Engineer.
 
 ## Included
-- Warm beige / ivory light theme
-- Charcoal dark theme
-- Light/dark mode toggle
+- Original Ruben-inspired editorial structure, not a copy
+- Warm beige/ivory light mode + charcoal dark mode
+- Custom HA monogram logo
+- User-supplied portrait used as-is
+- Downloadable CV in PDF and DOCX
+- Real contact links from the supplied CV
 - Responsive layout
-- Scroll reveal animations
-- Hover interactions
-- Hager's supplied portrait
-- Sections: Hero, About, Skills, Projects, Services, Contact
-- No invented professional experience or fake projects
-
-## Before publishing
-Open `index.html` and replace:
-- `YOUR_EMAIL@example.com`
-- LinkedIn `href="#"`
-- GitHub `href="#"`
-
-## Deploy with Vercel
-1. Create a new GitHub repository, e.g. `hager-arafa-portfolio`.
-2. Upload all files in this folder.
-3. In Vercel, import the GitHub repository.
-4. Deploy. The resulting URL can be shared as the live portfolio.
-5. Future GitHub pushes can trigger new deployments.
+- Scroll reveal animations and restrained hover interactions
+- Sections: Hero, About, Toolkit, Projects, Experience, Services, Contact
 
 ## Important
-The design is original and only takes general visual inspiration from modern editorial/portfolio layouts. It is not a copy of another person's website.
+Project descriptions are intentionally framed as practice/learning work. No professional projects, clients, testimonials, or achievements were invented.
+
+## Deploy
+Upload this folder to the GitHub repository and connect that repository to Vercel. `index.html` is the site entry point.
