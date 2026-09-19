@@ -1,156 +1,136 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Hager Arafa — Junior Data Engineer portfolio. Python, SQL, databases and data processing.">
-<title>Hager Arafa — Junior Data Engineer</title>
-<link rel="icon" href="assets/ha-mark.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Hager Arafa — Junior Data Engineer. Python, SQL, data processing and database foundations.">
+  <meta name="theme-color" content="#f4efe7">
+  <title>Hager Arafa — Data Engineer</title>
+  <link rel="icon" href="assets/ha-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="#home" aria-label="Hager Arafa home">
-    <img src="assets/ha-mark.svg" alt="" class="logo">
-    <span>HAGER ARAFA</span>
-  </a>
-  <nav aria-label="Primary navigation">
-    <a href="#home">Home</a><a href="#about">About</a><a href="#toolkit">Toolkit</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
-  </nav>
-  <div class="nav-actions">
-    <button id="themeToggle" class="theme" aria-label="Toggle light and dark mode"><span>☾</span><i></i><span>☀</span></button>
-    <a class="nav-cta" href="#contact">Let's Connect <span>↗</span></a>
-  </div>
-</header>
+  <div class="progress" id="progress"></div>
+  <div class="noise"></div>
 
-<main>
-<section id="home" class="hero">
-  <div class="hero-left reveal">
-    <p class="kicker">HELLO, I'M <span></span></p>
-    <h1>Hager<br><em>Arafa</em></h1>
-    <p class="role">Junior Data Engineer</p>
-    <p class="hero-text">I build practical data solutions, turning raw data into structured, useful information with Python and SQL.</p>
-    <div class="actions">
-      <a class="button" href="#projects">View My Work <span>→</span></a>
-      <a class="download" href="assets/Hager-Arafa-CV.pdf" download>Download CV <span>↓</span></a>
-    </div>
-  </div>
+  <header class="site-header">
+    <a class="mark" href="#top" aria-label="Hager Arafa home"><img src="assets/ha-mark.svg" alt="HA"></a>
+    <div class="header-center"><span class="status-dot"></span><span>AVAILABLE FOR OPPORTUNITIES</span></div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#about">About</a><a href="#stack">Stack</a><a href="#work">Work</a><a href="#background">Background</a>
+    </nav>
+    <a class="header-contact" href="#contact">Let's talk <span>↗</span></a>
+    <button class="menu" id="menu" aria-label="Open menu"><i></i><i></i></button>
+  </header>
 
-  <div class="hero-photo reveal delay">
-    <div class="photo-frame">
-      <img src="assets/hager-arafa.jpg" alt="Hager Arafa">
-      <div class="photo-tag">DATA<br>ENGINEERING</div>
-    </div>
-    <div class="code-note" aria-hidden="true"><span>SELECT *</span><br>FROM possibilities<br>WHERE <b>you</b> = 'here';</div>
-  </div>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-gridline"></div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow">JUNIOR DATA ENGINEER <b>/</b> ALEXANDRIA, EGYPT</p>
+        <h1><span>Data</span><span>with</span><em>intent.</em></h1>
+        <p class="hero-lede">I build practical foundations for working with data — from Python processing and SQL logic to structured databases and analysis-ready datasets.</p>
+        <div class="hero-actions">
+          <a class="btn btn-dark" href="#work">Explore work <span>↓</span></a>
+          <a class="text-btn" href="assets/Hager-Arafa-CV.pdf" download>Download CV <span>↗</span></a>
+        </div>
+      </div>
 
-  <div class="side-quote reveal">STRUCTURE<br><span>→</span><br>CLARITY<br><span>→</span><br>INSIGHT</div>
-</section>
+      <div class="hero-visual reveal delay-1">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="portrait-wrap"><img src="assets/hager-arafa.jpg" alt="Hager Arafa"></div>
+        <div class="visual-label label-a"><span>01</span><b>STRUCTURE</b><small>schema → logic → flow</small></div>
+        <div class="visual-label label-b"><span>02</span><b>CLARITY</b><small>raw → clean → ready</small></div>
+        <div class="stamp">PY<br><span>SQL</span><br>ETL</div>
+      </div>
 
-<section class="signal-strip">
-  <div><b>PYTHON</b><span>Data processing & scripting</span></div>
-  <div><b>SQL</b><span>Querying & databases</span></div>
-  <div><b>ETL</b><span>Transforming data</span></div>
-  <div><b>ANALYTICAL</b><span>Problem solving</span></div>
-</section>
+      <div class="hero-foot reveal delay-2"><span>SCROLL TO EXPLORE</span><span class="line"></span><span>01—06</span></div>
+    </section>
 
-<section id="about" class="about section">
-  <div class="section-label">01 / ABOUT ME</div>
-  <div class="about-grid">
-    <div class="about-art reveal">
-      <div class="art-box"><span>01</span><strong>RAW</strong><small>→</small><strong>STRUCTURED</strong><small>→</small><strong>READY</strong></div>
-      <p>From messy inputs to clearer data workflows.</p>
-    </div>
-    <div class="about-copy reveal delay">
-      <p class="kicker">A PRACTICAL APPROACH <span></span></p>
-      <h2>I like turning<br><em>complex data</em><br>into clear steps.</h2>
-      <p>As a Junior Data Engineer, I focus on reliable, structured and practical ways to work with data. My current work includes SQL development, database design, data processing and transformation, and the foundations of data pipelines.</p>
-      <p>I'm developing these skills through the Digital Egypt Pioneers Initiative (DEPI) Data Engineering Track, alongside hands-on practice with Python, SQL, T-SQL and Microsoft SQL Server.</p>
-      <a class="inline-link" href="#experience">More about my background <span>→</span></a>
-    </div>
-  </div>
-</section>
+    <section class="ticker" aria-label="Skills ticker">
+      <div class="ticker-track"><span>PYTHON</span><i>✦</i><span>SQL</span><i>✦</i><span>DATA PROCESSING</span><i>✦</i><span>DATABASES</span><i>✦</i><span>ETL FOUNDATIONS</span><i>✦</i><span>PYTHON</span><i>✦</i><span>SQL</span><i>✦</i><span>DATA PROCESSING</span></div>
+    </section>
 
-<section id="toolkit" class="toolkit section">
-  <div class="section-label">02 / TOOLKIT</div>
-  <div class="section-title reveal"><p class="kicker">MY TOOLKIT <span></span></p><h2>Tools I use to<br><em>work with data.</em></h2></div>
-  <div class="tool-grid">
-    <article class="tool reveal"><span>01</span><b>Python</b><p>Pandas · Data processing · scripting</p></article>
-    <article class="tool reveal delay"><span>02</span><b>SQL</b><p>T-SQL · Queries · joins · CTEs · windows</p></article>
-    <article class="tool reveal"><span>03</span><b>Databases</b><p>SQL Server · schema & relational design</p></article>
-    <article class="tool reveal delay"><span>04</span><b>Data Engineering</b><p>ETL · cleaning · transformation · pipelines</p></article>
-    <article class="tool reveal"><span>05</span><b>Analytics</b><p>Power BI · analysis-ready data</p></article>
-    <article class="tool reveal delay"><span>06</span><b>Tools</b><p>Git · GitHub · practical workflows</p></article>
-  </div>
-</section>
+    <section id="about" class="section about">
+      <div class="section-index">01 <span>ABOUT</span></div>
+      <div class="about-layout">
+        <div class="about-statement reveal"><span class="quote-mark">“</span><h2>Make the<br><em>mess</em><br>make sense.</h2></div>
+        <div class="about-body reveal delay-1">
+          <p class="lead">I’m Hager — a Junior Data Engineer building my skills around Python, SQL, databases and practical data workflows.</p>
+          <p>My approach is simple: break a data problem into clear steps, understand the structure underneath it, then build a solution that is useful and maintainable.</p>
+          <p>I’m developing these foundations through the Digital Egypt Pioneers Initiative (DEPI) Data Engineering Track and hands-on practice with Python, T-SQL, Microsoft SQL Server, APIs and data processing.</p>
+          <div class="about-facts"><div><b>01</b><span>Analytical<br>thinking</span></div><div><b>02</b><span>Problem<br>solving</span></div><div><b>03</b><span>Clear<br>communication</span></div></div>
+        </div>
+      </div>
+    </section>
 
-<section id="projects" class="projects">
-  <div class="section section-projects">
-    <div class="section-label light-label">03 / SELECTED PROJECTS</div>
-    <div class="project-heading reveal"><div><p class="kicker">PRACTICE & PROJECTS <span></span></p><h2>Building with<br><em>real data problems.</em></h2></div><a class="light-link" href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">GitHub ↗</a></div>
-    <div class="project-grid">
-      <article class="project-card reveal">
-        <div class="project-icon">01</div><div class="project-meta">PYTHON · API · PANDAS</div>
-        <h3>Job Market Data Processing</h3>
-        <p>Practical API work focused on collecting job data, parsing JSON responses, filtering records and preparing the results for analysis.</p>
-        <a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">View on GitHub <span>↗</span></a>
-      </article>
-      <article class="project-card reveal delay">
-        <div class="project-icon">02</div><div class="project-meta">SQL · T-SQL · SQL SERVER</div>
-        <h3>Database & SQL Practice</h3>
-        <p>Hands-on SQL Server work covering queries, joins, subqueries, CTEs, window functions, stored procedures, functions, triggers and transactions.</p>
-        <a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">View on GitHub <span>↗</span></a>
-      </article>
-      <article class="project-card muted-card reveal">
-        <div class="project-icon">03</div><div class="project-meta">NEXT BUILD</div>
-        <h3>More case studies coming</h3>
-        <p>New projects will be added as they are completed, with the problem, approach, technologies and results documented clearly.</p>
-        <span class="soon">COMING SOON</span>
-      </article>
-    </div>
-  </div>
-</section>
+    <section id="stack" class="section stack">
+      <div class="section-index">02 <span>TOOLKIT</span></div>
+      <div class="stack-head"><div><p class="eyebrow">THE WORKBENCH</p><h2>Tools for turning<br><em>questions into data.</em></h2></div><p>Not a list of buzzwords. A working set I’m actively practicing and applying.</p></div>
+      <div class="stack-grid">
+        <article class="stack-card featured reveal"><div class="stack-no">01</div><div class="stack-icon">Py</div><h3>Python</h3><p>Data processing, scripting, APIs and Pandas workflows.</p><div class="chips"><span>Pandas</span><span>Requests</span><span>JSON</span></div></article>
+        <article class="stack-card reveal delay-1"><div class="stack-no">02</div><div class="stack-icon">SQL</div><h3>SQL / T-SQL</h3><p>Queries, joins, CTEs, subqueries and window functions.</p><div class="chips"><span>CTE</span><span>Windows</span><span>Joins</span></div></article>
+        <article class="stack-card reveal delay-2"><div class="stack-no">03</div><div class="stack-icon">DB</div><h3>Databases</h3><p>Relational thinking, schema design and SQL Server practice.</p><div class="chips"><span>SQL Server</span><span>Schema</span></div></article>
+        <article class="stack-card reveal"><div class="stack-no">04</div><div class="stack-icon">ETL</div><h3>Data Engineering</h3><p>Cleaning, transformation and the foundations of data pipelines.</p><div class="chips"><span>Transform</span><span>Pipeline</span></div></article>
+        <article class="stack-card reveal delay-1"><div class="stack-no">05</div><div class="stack-icon">BI</div><h3>Analytics</h3><p>Preparing structured data for analysis and Power BI work.</p><div class="chips"><span>Power BI</span><span>Data prep</span></div></article>
+        <article class="stack-card reveal delay-2"><div class="stack-no">06</div><div class="stack-icon">GH</div><h3>Workflow</h3><p>Git and GitHub for versioned, shareable technical work.</p><div class="chips"><span>Git</span><span>GitHub</span></div></article>
+      </div>
+    </section>
 
-<section id="experience" class="experience section">
-  <div class="section-label">04 / EXPERIENCE</div>
-  <div class="experience-grid">
-    <div class="exp-title reveal"><p class="kicker">BACKGROUND <span></span></p><h2>Learning,<br>building,<br><em>explaining.</em></h2></div>
-    <div class="timeline reveal delay">
-      <div class="timeline-item"><span>2026 — NOW</span><div><h3>DEPI — Data Engineering Track</h3><p>Currently developing foundations in Python, SQL, T-SQL, Microsoft SQL Server, databases, data processing and data engineering concepts.</p></div></div>
-      <div class="timeline-item"><span>ONLINE · REMOTE</span><div><h3>Mathematics Teacher</h3><p>Two years of online mathematics teaching, using clear structured explanations, problem solving and analysis of student performance.</p></div></div>
-      <div class="timeline-item"><span>2021 — 2025</span><div><h3>Bachelor of General Mathematics</h3><p>Faculty of Education, Kafrelsheikh University.</p></div></div>
-    </div>
-  </div>
-</section>
+    <section id="work" class="section work">
+      <div class="section-index">03 <span>SELECTED WORK</span></div>
+      <div class="work-intro"><div><p class="eyebrow">PRACTICE → BUILD → LEARN</p><h2>Work that shows<br><em>how I think.</em></h2></div><a class="circle-link" href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">GitHub <span>↗</span></a></div>
 
-<section class="services section">
-  <div class="section-label">05 / WHAT I CAN HELP WITH</div>
-  <div class="service-head reveal"><p class="kicker">SERVICES <span></span></p><h2>Practical data work,<br><em>without the noise.</em></h2></div>
-  <div class="services-list">
-    <div class="service reveal"><span>01</span><b>SQL Query Development & Debugging</b><small>Queries · joins · subqueries · CTEs</small><i>↗</i></div>
-    <div class="service reveal"><span>02</span><b>Data Cleaning & Transformation</b><small>Python · Pandas · structured datasets</small><i>↗</i></div>
-    <div class="service reveal"><span>03</span><b>CSV & JSON Data Processing</b><small>Read · filter · transform · export</small><i>↗</i></div>
-    <div class="service reveal"><span>04</span><b>SQL Server Tasks</b><small>Procedures · functions · triggers · transactions</small><i>↗</i></div>
-  </div>
-</section>
+      <div class="case case-dark reveal">
+        <div class="case-top"><span>CASE 01</span><span>PYTHON / API / PANDAS</span></div>
+        <div class="case-body"><div class="case-copy"><h3>Job data<br><em>processing.</em></h3><p>Hands-on API practice: collect structured job records, inspect JSON responses, filter relevant roles and prepare the data for analysis.</p><a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">Open GitHub <span>↗</span></a></div><div class="data-visual"><div class="terminal"><div class="terminal-bar"><i></i><i></i><i></i><span>python · jobs.py</span></div><pre><code>response = requests.get(url)
+records = response.json()
 
-<section id="contact" class="contact">
-  <div class="section-label contact-label">06 / CONTACT</div>
-  <div class="contact-inner">
-    <div class="reveal"><p class="kicker">LET'S WORK TOGETHER <span></span></p><h2>Have a data<br>problem <em>in mind?</em></h2></div>
-    <div class="contact-right reveal delay"><p>I'm open to entry-level opportunities, practical data projects and collaboration while I continue growing as a Data Engineer.</p><a class="button light-button" href="mailto:hagar.arafa.tech@gmail.com">Get In Touch <span>→</span></a></div>
-  </div>
-  <div class="contact-links">
-    <a href="mailto:hagar.arafa.tech@gmail.com">Email <span>↗</span></a>
-    <a href="https://www.linkedin.com/in/hagar-arafa-413707416/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a>
-    <a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">GitHub <span>↗</span></a>
-  </div>
-  <footer><span>HAGER ARAFA</span><span>JUNIOR DATA ENGINEER</span><span>© 2026</span></footer>
-</section>
-</main>
-<script src="script.js"></script>
+jobs = pd.DataFrame(records)
+engineer = jobs[
+  jobs["title"].str.contains("engineer")
+]</code></pre></div><div class="float-tag">JSON → TABLE</div></div></div>
+      </div>
+
+      <div class="case case-light reveal">
+        <div class="case-top"><span>CASE 02</span><span>SQL / T-SQL / SQL SERVER</span></div>
+        <div class="case-body"><div class="sql-visual"><div class="sql-line"><b>SELECT</b><span>structured thinking</span></div><div class="sql-line"><b>JOIN</b><span>related information</span></div><div class="sql-line"><b>WINDOW</b><span>find patterns</span></div><div class="sql-line"><b>CTE</b><span>break down complexity</span></div></div><div class="case-copy"><h3>SQL that<br><em>answers questions.</em></h3><p>Practice across joins, subqueries, CTEs, window functions, stored procedures, functions, triggers and transactions in Microsoft SQL Server.</p><a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">Explore code <span>↗</span></a></div></div>
+      </div>
+
+      <div class="work-note"><span>03</span><p>More case studies will appear here as they are completed and documented — no filler projects.</p></div>
+    </section>
+
+    <section id="background" class="section background">
+      <div class="section-index">04 <span>BACKGROUND</span></div>
+      <div class="background-layout"><div class="background-title reveal"><p class="eyebrow">THE PATH SO FAR</p><h2>Learning.<br>Building.<br><em>Explaining.</em></h2></div><div class="timeline reveal delay-1">
+        <div class="timeline-row"><span>2026 — NOW</span><div><h3>DEPI · Data Engineering Track</h3><p>Developing practical foundations in Python, SQL, T-SQL, databases, data processing and ETL concepts.</p></div></div>
+        <div class="timeline-row"><span>2 YEARS</span><div><h3>Online Mathematics Teacher</h3><p>Two years of online teaching, building structured explanations, analytical thinking and problem-solving skills.</p></div></div>
+        <div class="timeline-row"><span>2021 — 2025</span><div><h3>Bachelor of General Mathematics</h3><p>Faculty of Education, Kafrelsheikh University.</p></div></div>
+      </div></div>
+    </section>
+
+    <section class="services section">
+      <div class="section-index">05 <span>WHAT I CAN HELP WITH</span></div>
+      <div class="services-head"><p class="eyebrow">PRACTICAL SUPPORT</p><h2>Small, useful<br><em>data work.</em></h2></div>
+      <div class="service-list">
+        <a href="mailto:hagar.arafa.tech@gmail.com?subject=SQL%20support" class="service"><span>01</span><b>SQL Query Development & Debugging</b><small>Queries · joins · subqueries · CTEs</small><i>↗</i></a>
+        <a href="mailto:hagar.arafa.tech@gmail.com?subject=Data%20cleaning%20support" class="service"><span>02</span><b>Data Cleaning & Transformation</b><small>Python · Pandas · structured datasets</small><i>↗</i></a>
+        <a href="mailto:hagar.arafa.tech@gmail.com?subject=CSV%20JSON%20processing" class="service"><span>03</span><b>CSV & JSON Data Processing</b><small>Read · filter · transform · export</small><i>↗</i></a>
+        <a href="mailto:hagar.arafa.tech@gmail.com?subject=SQL%20Server%20task" class="service"><span>04</span><b>SQL Server Tasks</b><small>Procedures · functions · triggers · transactions</small><i>↗</i></a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact-orbit"></div>
+      <div class="section-index light-index">06 <span>CONTACT</span></div>
+      <div class="contact-layout"><div><p class="eyebrow">LET'S BUILD SOMETHING USEFUL</p><h2>Have a data<br><em>problem?</em></h2></div><div class="contact-copy"><p>I’m open to entry-level opportunities, practical data projects and collaborations where I can contribute, learn and keep building.</p><a class="contact-email" href="mailto:hagar.arafa.tech@gmail.com">hagar.arafa.tech@gmail.com <span>↗</span></a></div></div>
+      <div class="contact-footer"><div class="socials"><a href="https://www.linkedin.com/in/hagar-arafa-413707416/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/hegererefe111-debug/hagar_code_lab" target="_blank" rel="noopener">GitHub ↗</a><a href="assets/Hager-Arafa-CV.pdf" download>CV ↓</a></div><div>HAGER ARAFA · JUNIOR DATA ENGINEER · 2026</div></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
