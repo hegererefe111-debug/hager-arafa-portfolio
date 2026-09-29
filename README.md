@@ -1,15 +1,28 @@
-# Hager Arafa — Portfolio v2
+# Hager Arafa — Data Engineer Portfolio
 
-Static portfolio site for Hager Arafa, Junior Data Engineer.
+A clean, editorial-style portfolio for Hager Arafa, Data Engineer.
+
+## Design direction
+- Minimal editorial layout
+- Strong typography and generous whitespace
+- One muted accent color
+- Original portrait and CV assets retained
+- Responsive on desktop, tablet and mobile
+- No skill ratings, fake metrics, testimonials, or filler projects
+
+## Current featured project
+[Naukrigulf Data Engineer Job Scraper](https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper)
+
+The portfolio presents the project using the actual documented scope: first three result pages, job details, full descriptions, and CSV output.
 
 ## Files
-- `index.html` — page structure/content
-- `style.css` — responsive design, light/dark theme, animations
-- `script.js` — scroll reveal, progress bar, mobile navigation, theme persistence
-- `assets/hager-arafa.jpg` — portrait
-- `assets/ha-mark.svg` — HA mark
-- `assets/Hager-Arafa-CV.pdf` — CV download
-- `assets/Hager-Arafa-CV.docx` — editable CV
+- `index.html`
+- `style.css`
+- `script.js`
+- `assets/hager-arafa.jpg`
+- `assets/Hager-Arafa-CV.pdf`
+- `assets/Hager-Arafa-CV.docx`
+- `assets/ha-mark.svg`
 
 ## Deploy
-Upload the contents of this folder to the existing GitHub repository and let Vercel redeploy.
+Upload the folder to GitHub and connect the repository to Vercel.
