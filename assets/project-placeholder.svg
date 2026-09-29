@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#20231e"/>
+  <g fill="none" stroke="#68755f" stroke-width="2" opacity=".65">
+    <path d="M80 120H1120M80 230H1120M80 340H1120M80 450H1120M80 560H1120"/>
+    <path d="M180 70V630M400 70V630M620 70V630M840 70V630M1060 70V630"/>
+  </g>
+  <text x="600" y="335" fill="#f5f2e9" font-family="monospace" font-size="28" text-anchor="middle">PROJECT SCREENSHOT</text>
+  <text x="600" y="375" fill="#a8b39c" font-family="monospace" font-size="14" text-anchor="middle">replace assets/project-placeholder.svg when a real project image is available</text>
+</svg>
