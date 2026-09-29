@@ -4,16 +4,16 @@
 ========================================================= */
 
 :root {
-  --cream: #f5f2e9;
-  --cream-2: #ebe7dc;
+  --cream: #f4f0e6;
+  --cream-2: #e5e1d5;
   --ink: #171914;
   --ink-2: #34372f;
   --muted: #565b52;
   --line: rgba(23, 25, 20, .16);
-  --sage: #68755f;
-  --sage-2: #a8b39c;
-  --dark: #151713;
-  --dark-2: #1d201b;
+  --sage: #596b55;
+  --sage-2: #9baa91;
+  --dark: #172019;
+  --dark-2: #202a22;
   --dark-text: #f5f2e9;
   --dark-muted: #c0c4ba;
   --dark-line: rgba(245,242,233,.17);
@@ -118,13 +118,38 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-weight: 700;
 }
 .brand-mark {
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 1px solid currentColor;
-  font-family: var(--mono);
-  font-size: 9px;
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border: 1px solid var(--ink);
+  border-radius: 11px 11px 11px 3px;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -.03em;
+  transform: rotate(-4deg);
+  overflow: hidden;
+}
+.brand-mark span {
+  position: relative;
+  z-index: 1;
+  transform: rotate(4deg);
+}
+.brand-mark i {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  right: -7px;
+  bottom: -9px;
+  border: 1px solid var(--sage);
+  border-radius: 50%;
+}
+.brand:hover .brand-mark {
+  border-color: var(--sage);
 }
 .site-nav {
   display: flex;
@@ -509,6 +534,27 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: var(--sage-2);
   color: var(--dark);
 }
+.contact-location {
+  margin: 0 0 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--ink-2);
+}
+
+.project-visual {
+  margin: 0 0 28px;
+  aspect-ratio: 16 / 7;
+  border: 1px solid var(--dark-line);
+  background: var(--dark-2);
+  overflow: hidden;
+}
+.project-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .project-pipeline {
   margin: 0 0 30px;
   padding: 16px;

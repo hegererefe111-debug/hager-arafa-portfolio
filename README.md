@@ -45,13 +45,13 @@ Because this site has no build step, GitHub Pages can serve `index.html` directl
 
 ## Before publishing
 
-Replace these placeholders:
+Professional links are already connected:
 
-- LinkedIn URL in `index.html`
-- GitHub profile URL in `index.html`
-- `projects[0].links.github` in `script.js`
-- `projects[0].links.project` in `script.js`
-- `assets/project-placeholder.svg` with a real project screenshot if available
+- LinkedIn: `https://www.linkedin.com/in/hagar-arafa-413707416/`
+- GitHub: `https://github.com/hegererefe111-debug`
+- Naukrigulf project: `https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper`
+
+If you later add a live deployed project URL, update `projects[0].links.project` in `script.js`. The CV is served locally from `assets/cv.pdf`.
 
 The CV and portrait are already wired to:
 
@@ -88,7 +88,7 @@ Before publishing:
 - Check the page at 360px width.
 - Check the page at 768px width.
 - Check the page at 1440px width.
-- Replace all placeholder links.
+- Confirm LinkedIn, GitHub, and project links open correctly.
 - Test the CV download.
 - Test email.
 - Test GitHub and LinkedIn.

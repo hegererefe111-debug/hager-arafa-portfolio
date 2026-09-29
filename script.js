@@ -30,8 +30,8 @@ const projects = [
       "naukrigulf_data_engineer.csv",
 
     links: {
-      github: "#",
-      project: "#"
+      github: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper",
+      project: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper"
     },
 
     screenshot: "assets/project-placeholder.svg",
@@ -130,6 +130,10 @@ function renderProjects(items) {
         </div>
 
         <div>
+          <div class="project-visual">
+            <img src="${project.screenshot}" alt="Screenshot placeholder for ${project.title}" loading="lazy">
+          </div>
+
           <div class="project-pipeline">
             ${project.pipeline}
           </div>
@@ -258,15 +262,6 @@ function observeReveals() {
 
   items.forEach((item) => revealObserver.observe(item));
 }
-
-/* ---------- Placeholder links ---------- */
-
-document.querySelectorAll("[data-placeholder]").forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    alert(`${link.dataset.placeholder} link is a placeholder. Replace it before publishing.`);
-  });
-});
 
 renderProjects(projects);
 observeReveals();
