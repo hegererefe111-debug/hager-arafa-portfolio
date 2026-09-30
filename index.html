@@ -27,26 +27,31 @@
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
   <header class="topbar" id="topbar">
-    <a class="identity" href="#home" aria-label="Hagar Arafa home">
-      <span class="monogram" aria-hidden="true">HA</span>
-      <span>Hagar Arafa</span>
-    </a>
+    <div class="topbar-main">
+      <a class="identity" href="#home" aria-label="Hagar Arafa home">
+        <span class="monogram" aria-hidden="true">HA</span>
+        <span>Hagar Arafa</span>
+      </a>
 
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="top-actions">
-      <button class="theme-toggle magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
-        <span class="theme-icon" aria-hidden="true">◐</span>
-        <span class="theme-label">Light</span>
-      </button>
-      <a class="cv-link magnetic" href="assets/Hager-Arafa-CV.pdf" download aria-label="Download Hagar Arafa CV">CV <span aria-hidden="true">↗</span></a>
+      <div class="top-actions">
+        <a class="cv-link magnetic" href="assets/Hagar-Arafa-CV.pdf" download aria-label="Download Hagar Arafa CV">CV <span aria-hidden="true">↗</span></a>
+        <button class="theme-toggle magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="theme-label">Light</span>
+        </button>
+      </div>
     </div>
+
+    <nav class="nav-row" id="navRow" aria-label="Primary navigation">
+      <div class="nav-scroll">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
   </header>
 
   <main>
@@ -65,7 +70,7 @@
         <p class="hero-description intro-item">I’m building practical foundations in data engineering through Python, SQL, databases, and data processing.</p>
         <div class="hero-actions intro-item">
           <a class="button button-primary magnetic" href="#projects">View selected work <span aria-hidden="true">↗</span></a>
-          <a class="text-link magnetic" href="assets/Hager-Arafa-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
+          <a class="text-link magnetic" href="assets/Hagar-Arafa-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
         </div>
       </div>
 
@@ -82,21 +87,33 @@
             <span>ETL</span>
           </div>
           <div class="pipeline-visual">
-            <svg viewBox="0 0 540 116" role="img" aria-label="Extract to Transform to Load pipeline">
-              <path class="pipeline-track" d="M44 58 H496" pathLength="1"></path>
-              <circle class="pipeline-node" cx="44" cy="58" r="6"></circle>
-              <circle class="pipeline-node" cx="270" cy="58" r="6"></circle>
-              <circle class="pipeline-node" cx="496" cy="58" r="6"></circle>
-              <circle class="pipeline-pulse" cx="44" cy="58" r="3"></circle>
-              <circle class="pipeline-pulse pulse-two" cx="44" cy="58" r="3"></circle>
+            <svg class="pipeline-svg pipeline-svg-horizontal" viewBox="0 0 540 100" role="img" aria-label="Extract to Transform to Load pipeline">
+              <path class="pipeline-track" d="M50 50 H490"></path>
+              <circle class="pipeline-node" cx="50" cy="50" r="6"></circle>
+              <circle class="pipeline-node" cx="270" cy="50" r="6"></circle>
+              <circle class="pipeline-node" cx="490" cy="50" r="6"></circle>
             </svg>
-            <div class="pipeline-labels" aria-hidden="true">
+            <div class="pipeline-labels pipeline-labels-horizontal" aria-hidden="true">
               <span><b>EXTRACT</b><small>source</small></span>
               <span><b>TRANSFORM</b><small>clean</small></span>
               <span><b>LOAD</b><small>ready</small></span>
             </div>
-            <div class="data-packet packet-one" aria-hidden="true"></div>
-            <div class="data-packet packet-two" aria-hidden="true"></div>
+            <span class="data-packet packet-horizontal packet-one" aria-hidden="true"></span>
+            <span class="data-packet packet-horizontal packet-two" aria-hidden="true"></span>
+
+            <svg class="pipeline-svg pipeline-svg-vertical" viewBox="0 0 160 250" aria-hidden="true">
+              <path class="pipeline-track" d="M80 25 V225"></path>
+              <circle class="pipeline-node" cx="80" cy="25" r="6"></circle>
+              <circle class="pipeline-node" cx="80" cy="125" r="6"></circle>
+              <circle class="pipeline-node" cx="80" cy="225" r="6"></circle>
+            </svg>
+            <div class="pipeline-labels pipeline-labels-vertical" aria-hidden="true">
+              <span><b>EXTRACT</b><small>source</small></span>
+              <span><b>TRANSFORM</b><small>clean</small></span>
+              <span><b>LOAD</b><small>ready</small></span>
+            </div>
+            <span class="data-packet packet-vertical packet-three" aria-hidden="true"></span>
+            <span class="data-packet packet-vertical packet-four" aria-hidden="true"></span>
           </div>
         </div>
       </div>
@@ -144,7 +161,6 @@
           </div>
           <span class="project-count" id="projectCount">01 / 01</span>
         </div>
-
         <div id="projectList" class="project-list" aria-live="polite"></div>
       </div>
     </section>
@@ -162,7 +178,7 @@
         </article>
         <article class="timeline-row">
           <span>~2 YEARS</span>
-          <div><h3>Online Mathematics Teacher</h3><p>Online mathematics teaching with an emphasis on structured explanation, analytical thinking and problem solving.</p><p class="edit-placeholder">[EDIT: Add one short factual line about your teaching work.]</p></div>
+          <div><h3>Online Mathematics Teacher</h3><p>Online mathematics teaching with an emphasis on structured explanation, analytical thinking and problem solving.</p></div>
         </article>
         <article class="timeline-row">
           <span>2021 — 2025</span>
@@ -183,9 +199,9 @@
             <a class="magnetic" href="mailto:hagar.arafa.tech@gmail.com">Email <span aria-hidden="true">↗</span></a>
             <a class="magnetic" href="https://www.linkedin.com/in/hagar-arafa-413707416/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
             <a class="magnetic" href="https://github.com/hegererefe111-debug" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a class="magnetic" href="assets/Hager-Arafa-CV.pdf" download>CV <span aria-hidden="true">↓</span></a>
+            <a class="magnetic" href="assets/Hagar-Arafa-CV.pdf" download>CV <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="footer-meta"><span>HAGER ARAFA / JUNIOR DATA ENGINEER</span><span>© 2026</span></div>
+          <div class="footer-meta"><span>HAGAR ARAFA / JUNIOR DATA ENGINEER</span><span>© 2026</span></div>
         </div>
       </div>
     </section>

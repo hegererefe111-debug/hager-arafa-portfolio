@@ -5,13 +5,14 @@
 
   const root = document.documentElement;
   const body = document.body;
+  const topbar = document.getElementById("topbar");
   const themeToggle = document.getElementById("themeToggle");
   const projectList = document.getElementById("projectList");
   const projectCount = document.getElementById("projectCount");
   const progress = document.querySelector(".scroll-progress span");
   const spotlight = document.querySelector(".cursor-spotlight");
   const typedWord = document.getElementById("typedWord");
-  const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const navLinks = [...document.querySelectorAll('.nav-row a[href^="#"]')];
 
   const projects = [
     {
@@ -25,67 +26,78 @@
       approach: "Search for Data Engineer listings, collect the first three result pages, open each listing, extract the full description, assemble the records, and export the final dataset as CSV.",
       tools: ["Python", "Selenium", "Pandas", "undetected-chromedriver"],
       challenges: "Handling dynamic pages, pagination, individual listing navigation, and keeping the extracted records consistent while the browser moves between result pages and job pages.",
-      result: "90 job listings collected across 3 result pages and exported as a CSV with 6 structured fields.",
+      result: "The resulting CSV provides a structured dataset that can be inspected, filtered, and used as a starting point for further data processing or analysis.",
+      stats: [
+        ["90", "job listings"],
+        ["03", "result pages"],
+        ["06", "structured fields"]
+      ],
       fields: ["job title", "company", "location", "experience", "job URL", "description"],
       output: "naukrigulf_data_engineer.csv",
       github: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper",
-      screenshot: "Project screenshot placeholder — replace this block with a real project screenshot when ready.",
+      screenshot: "",
       code: `jobs = driver.find_elements(\n    "css selector",\n    "div.ng-box.srp-tuple"\n)\n\nfor job in jobs:\n    title = job.find_element(\n        "css selector", "p.designation-title"\n    ).text\n    # extract fields, open listing,\n    # then collect the full description`
     }
   ];
 
   function renderProjects() {
     if (!projectList) return;
-    projectList.innerHTML = projects.map((project) => `
-      <article class="project-card project-tilt reveal-child">
-        <div class="project-top">
-          <span>${project.category}</span>
-          <span>${project.year}</span>
-        </div>
 
-        <div class="project-main">
-          <div class="project-title">
-            <span class="project-number">${project.number}</span>
-            <h3>${project.title}<br><em>${project.subtitle}</em></h3>
-          </div>
-          <div class="project-description">
-            <p>${project.description}</p>
-            <div class="project-links">
-              <a class="project-button primary magnetic" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub repository <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-grid" aria-label="Project summary">
-          <div class="project-stat"><strong>90</strong><span>job listings collected</span></div>
-          <div class="project-stat"><strong>03</strong><span>result pages</span></div>
-          <div class="project-stat"><strong>06</strong><span>structured fields</span></div>
-        </div>
-
-        <div class="project-details">
-          <section class="project-detail"><h4>PROBLEM</h4><p>${project.problem}</p></section>
-          <section class="project-detail"><h4>APPROACH</h4><p>${project.approach}</p></section>
-          <section class="project-detail"><h4>TOOLS</h4><div class="project-tools">${project.tools.map((tool) => `<span class="project-tag magnetic">${tool}</span>`).join("")}</div></section>
-          <section class="project-detail"><h4>CHALLENGES</h4><p>${project.challenges}</p></section>
-          <section class="project-detail"><h4>RESULT</h4><p>${project.result}</p></section>
-          <section class="project-detail"><h4>FIELDS</h4><div class="project-tools">${project.fields.map((field) => `<span class="project-tag">${field}</span>`).join("")}</div></section>
+    projectList.innerHTML = projects.map((project) => {
+      const screenshotMarkup = project.screenshot?.trim()
+        ? `
           <section class="project-detail">
             <h4>SCREENSHOT</h4>
             <div class="project-screenshot"><div><strong>PROJECT VISUAL</strong><span>${project.screenshot}</span></div></div>
-          </section>
-          <section class="project-detail">
-            <h4>CODE</h4>
-            <pre class="project-code"><code>${escapeHtml(project.code)}</code></pre>
-          </section>
-        </div>
+          </section>`
+        : "";
 
-        <div class="project-output">
-          <span>OUTPUT</span>
-          <strong>${project.output}</strong>
-          <a href="${project.github}" target="_blank" rel="noopener noreferrer">VIEW PROJECT ↗</a>
-        </div>
-      </article>
-    `).join("");
+      return `
+        <article class="project-card project-tilt reveal-child">
+          <div class="project-top">
+            <span>${project.category}</span>
+            <span>${project.year}</span>
+          </div>
+
+          <div class="project-main">
+            <div class="project-title">
+              <span class="project-number">${project.number}</span>
+              <h3>${project.title}<br><em>${project.subtitle}</em></h3>
+            </div>
+            <div class="project-description">
+              <p>${project.description}</p>
+              <div class="project-links">
+                <a class="project-button primary magnetic" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub repository <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-grid" aria-label="Project summary">
+            ${project.stats.map(([value, label]) => `<div class="project-stat"><strong>${value}</strong><span>${label}</span></div>`).join("")}
+          </div>
+
+          <div class="project-details">
+            <section class="project-detail"><h4>PROBLEM</h4><p>${project.problem}</p></section>
+            <section class="project-detail"><h4>APPROACH</h4><p>${project.approach}</p></section>
+            <section class="project-detail"><h4>TOOLS</h4><div class="project-tools">${project.tools.map((tool) => `<span class="project-tag magnetic">${tool}</span>`).join("")}</div></section>
+            <section class="project-detail"><h4>CHALLENGES</h4><p>${project.challenges}</p></section>
+            <section class="project-detail"><h4>RESULT</h4><p>${project.result}</p></section>
+            <section class="project-detail"><h4>FIELDS</h4><div class="project-tools">${project.fields.map((field) => `<span class="project-tag">${field}</span>`).join("")}</div></section>
+            ${screenshotMarkup}
+            <section class="project-detail">
+              <h4>CODE</h4>
+              <pre class="project-code"><code>${escapeHtml(project.code)}</code></pre>
+            </section>
+          </div>
+
+          <div class="project-output">
+            <span>OUTPUT</span>
+            <strong>${project.output}</strong>
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer">VIEW PROJECT ↗</a>
+          </div>
+        </article>
+      `;
+    }).join("");
 
     if (projectCount) {
       projectCount.textContent = `${String(projects.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`;
@@ -164,6 +176,35 @@
     window.addEventListener("resize", update, { passive: true });
   }
 
+  function setupHeader() {
+    if (!topbar) return;
+
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const update = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+
+      if (currentY <= 10) {
+        topbar.classList.remove("nav-hidden");
+      } else if (delta > 4 && currentY > 90) {
+        topbar.classList.add("nav-hidden");
+      } else if (delta < -4) {
+        topbar.classList.remove("nav-hidden");
+      }
+
+      lastY = currentY;
+      ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+  }
+
   function setupActiveNav() {
     const sections = navLinks
       .map((link) => document.querySelector(link.getAttribute("href")))
@@ -192,8 +233,7 @@
 
     let index = 0;
     let deleting = false;
-    let current = words[index];
-    let position = current.length;
+    let position = words[index].length;
 
     const tick = () => {
       const target = words[index];
@@ -211,14 +251,13 @@
         if (position === 0) {
           deleting = false;
           index = (index + 1) % words.length;
-          current = words[index];
           position = 0;
         }
       }
       setTimeout(tick, deleting ? 38 : 70);
     };
 
-    typedWord.textContent = current;
+    typedWord.textContent = words[index];
     setTimeout(tick, 1150);
   }
 
@@ -226,6 +265,22 @@
     document.querySelectorAll(".image-fallback img").forEach((img) => {
       img.addEventListener("error", () => img.closest(".image-fallback")?.classList.add("is-broken"), { once: true });
     });
+  }
+
+  function setupPipelineMotion() {
+    const visual = document.querySelector(".pipeline-visual");
+    if (!visual) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const update = () => {
+      visual.style.setProperty("--packet-travel-x", `${visual.clientWidth * 0.815}px`);
+      visual.style.setProperty("--packet-travel-y", `${visual.clientHeight * 0.825}px`);
+    };
+
+    update();
+    window.addEventListener("resize", update, { passive: true });
   }
 
   function setupSpotlight() {
@@ -270,9 +325,11 @@
   setupIntro();
   setupReveal();
   setupProgress();
+  setupHeader();
   setupActiveNav();
   setupTyping();
   setupImageFallback();
+  setupPipelineMotion();
   setupSpotlight();
   setupTilt();
   setupMagnetic();

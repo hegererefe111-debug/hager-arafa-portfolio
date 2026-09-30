@@ -7,8 +7,8 @@ Vanilla HTML, CSS and JavaScript portfolio for Hagar Arafa, Junior Data Engineer
 - `style.css`
 - `script.js`
 - `assets/photo.jpg`
-- `assets/Hager-Arafa-CV.pdf`
-- `assets/Hager-Arafa-CV.docx`
+- `assets/Hagar-Arafa-CV.pdf`
+- `assets/Hagar-Arafa-CV.docx`
 - `assets/ha-mark.svg`
 
 No framework or build step is required. The site is suitable for GitHub Pages and Vercel.
