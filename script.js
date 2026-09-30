@@ -1,267 +1,279 @@
-/* =========================================================
-   HAGAR ARAFA — PORTFOLIO INTERACTIONS
-========================================================= */
+/* Hagar Arafa Portfolio — vanilla JS only. */
 
-const projects = [
-  {
-    year: "2026",
-    category: "PYTHON · SELENIUM · PANDAS",
-    title: "Naukrigulf Data Engineer Job Scraper",
+(() => {
+  "use strict";
 
-    summary:
-      "A Selenium-based scraper that collects Data Engineer job listings from the first three result pages, opens each listing, extracts the full description, and writes the result to CSV.",
+  const root = document.documentElement;
+  const body = document.body;
+  const themeToggle = document.getElementById("themeToggle");
+  const projectList = document.getElementById("projectList");
+  const projectCount = document.getElementById("projectCount");
+  const progress = document.querySelector(".scroll-progress span");
+  const spotlight = document.querySelector(".cursor-spotlight");
+  const typedWord = document.getElementById("typedWord");
+  const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
 
-    problem:
-      "Collect structured job information from a live job-search website across multiple result pages.",
-
-    approach:
-      "Navigate the result pages, extract listing fields, open each job URL for the full description, then assemble the collected records into a Pandas DataFrame and CSV.",
-
-    tools:
-      "Python · Selenium · undetected-chromedriver · Pandas",
-
-    challenges:
-      "Working with dynamic pages, pagination, individual listing pages, and keeping extracted data structured while navigating between pages.",
-
-    result:
-      "90 listings collected from the first three result pages. The CSV contains job title, company, location, experience, job URL, and description.",
-
-    output:
-      "naukrigulf_data_engineer.csv",
-
-    links: {
+  const projects = [
+    {
+      number: "01",
+      year: "2026",
+      category: "PYTHON · SELENIUM · PANDAS",
+      title: "Naukrigulf",
+      subtitle: "Data Engineer Job Scraper",
+      description: "A Selenium-based scraper built to collect Data Engineer job listings from the first three Naukrigulf result pages, open individual listings, extract the full job description, and produce a structured CSV dataset.",
+      problem: "Collect job-market records from the first three result pages and preserve the listing details in a structured dataset.",
+      approach: "Search for Data Engineer listings, collect the first three result pages, open each listing, extract the full description, assemble the records, and export the final dataset as CSV.",
+      tools: ["Python", "Selenium", "Pandas", "undetected-chromedriver"],
+      challenges: "Handling dynamic pages, pagination, individual listing navigation, and keeping the extracted records consistent while the browser moves between result pages and job pages.",
+      result: "90 job listings collected across 3 result pages and exported as a CSV with 6 structured fields.",
+      fields: ["job title", "company", "location", "experience", "job URL", "description"],
+      output: "naukrigulf_data_engineer.csv",
       github: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper",
-      project: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper"
-    },
+      screenshot: "Project screenshot placeholder — replace this block with a real project screenshot when ready.",
+      code: `jobs = driver.find_elements(\n    "css selector",\n    "div.ng-box.srp-tuple"\n)\n\nfor job in jobs:\n    title = job.find_element(\n        "css selector", "p.designation-title"\n    ).text\n    # extract fields, open listing,\n    # then collect the full description`
+    }
+  ];
 
-    screenshot: "assets/project-placeholder.svg",
-
-    code: `jobs_data = extract_job_data(jobs)
-
-extract_descriptions(
-    driver,
-    jobs_data,
-    all_jobs
-)
-
-df = pd.DataFrame(all_jobs)
-df.to_csv(
-    "naukrigulf_data_engineer.csv",
-    index=False
-)`,
-
-    pipeline: `
-      <svg viewBox="0 0 720 170" role="img" aria-label="Project pipeline: search, extract, open listings, transform, CSV">
-        <defs>
-          <style>
-            .p-box{fill:#20231e;stroke:#9eaa92;stroke-width:1}
-            .p-text{fill:#f5f2e9;font:500 12px "DM Mono",monospace;letter-spacing:.5px}
-            .p-line{stroke:#9eaa92;stroke-width:1.4}
-          </style>
-        </defs>
-        <rect class="p-box" x="12" y="58" width="118" height="52"/>
-        <text class="p-text" x="71" y="88" text-anchor="middle">SEARCH</text>
-
-        <line class="p-line" x1="130" y1="84" x2="174" y2="84"/>
-        <polygon fill="#9eaa92" points="174,84 166,79 166,89"/>
-
-        <rect class="p-box" x="176" y="58" width="118" height="52"/>
-        <text class="p-text" x="235" y="88" text-anchor="middle">EXTRACT</text>
-
-        <line class="p-line" x1="294" y1="84" x2="338" y2="84"/>
-        <polygon fill="#9eaa92" points="338,84 330,79 330,89"/>
-
-        <rect class="p-box" x="340" y="58" width="118" height="52"/>
-        <text class="p-text" x="399" y="82" text-anchor="middle">OPEN</text>
-        <text class="p-text" x="399" y="98" text-anchor="middle">LISTINGS</text>
-
-        <line class="p-line" x1="458" y1="84" x2="502" y2="84"/>
-        <polygon fill="#9eaa92" points="502,84 494,79 494,89"/>
-
-        <rect class="p-box" x="504" y="58" width="92" height="52"/>
-        <text class="p-text" x="550" y="88" text-anchor="middle">CLEAN</text>
-
-        <line class="p-line" x1="596" y1="84" x2="640" y2="84"/>
-        <polygon fill="#9eaa92" points="640,84 632,79 632,89"/>
-
-        <rect class="p-box" x="642" y="58" width="66" height="52"/>
-        <text class="p-text" x="675" y="88" text-anchor="middle">CSV</text>
-      </svg>
-    `
-  }
-];
-
-const projectList = document.querySelector("#project-list");
-
-function renderProjects(items) {
-  if (!projectList) return;
-
-  projectList.innerHTML = items.map((project) => `
-    <article class="project-card reveal">
-      <div class="project-top">
-        <span>${project.category}</span>
-        <span>${project.year}</span>
-      </div>
-
-      <div class="project-body">
-
-        <div class="project-copy">
-          <h3>${project.title}</h3>
-
-          <p>${project.summary}</p>
-
-          <div class="project-links">
-            <a class="project-link primary"
-               href="${project.links.github}"
-               target="_blank"
-               rel="noopener noreferrer">
-              GitHub <span aria-hidden="true">↗</span>
-            </a>
-
-            <a class="project-link"
-               href="${project.links.project}"
-               target="_blank"
-               rel="noopener noreferrer">
-              View Project <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-
-          <pre class="code-block"><code>${escapeHtml(project.code)}</code></pre>
+  function renderProjects() {
+    if (!projectList) return;
+    projectList.innerHTML = projects.map((project) => `
+      <article class="project-card project-tilt reveal-child">
+        <div class="project-top">
+          <span>${project.category}</span>
+          <span>${project.year}</span>
         </div>
 
-        <div>
-          <div class="project-visual">
-            <img src="${project.screenshot}" alt="Screenshot placeholder for ${project.title}" loading="lazy">
+        <div class="project-main">
+          <div class="project-title">
+            <span class="project-number">${project.number}</span>
+            <h3>${project.title}<br><em>${project.subtitle}</em></h3>
           </div>
-
-          <div class="project-pipeline">
-            ${project.pipeline}
-          </div>
-
-          <div class="project-details">
-            <div class="detail">
-              <h4>Problem</h4>
-              <p>${project.problem}</p>
-            </div>
-
-            <div class="detail">
-              <h4>Approach</h4>
-              <p>${project.approach}</p>
-            </div>
-
-            <div class="detail">
-              <h4>Tools</h4>
-              <p>${project.tools}</p>
-            </div>
-
-            <div class="detail">
-              <h4>Challenges</h4>
-              <p>${project.challenges}</p>
-            </div>
-
-            <div class="detail">
-              <h4>Result</h4>
-              <p>${project.result}</p>
-            </div>
-
-            <div class="detail">
-              <h4>Output</h4>
-              <p>${project.output}</p>
+          <div class="project-description">
+            <p>${project.description}</p>
+            <div class="project-links">
+              <a class="project-button primary magnetic" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub repository <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </div>
 
-      </div>
+        <div class="project-grid" aria-label="Project summary">
+          <div class="project-stat"><strong>90</strong><span>job listings collected</span></div>
+          <div class="project-stat"><strong>03</strong><span>result pages</span></div>
+          <div class="project-stat"><strong>06</strong><span>structured fields</span></div>
+        </div>
 
-      <div class="project-foot">
-        <span>PROJECT CASE STUDY</span>
-        <span>PYTHON / SELENIUM / PANDAS</span>
-      </div>
-    </article>
-  `).join("");
+        <div class="project-details">
+          <section class="project-detail"><h4>PROBLEM</h4><p>${project.problem}</p></section>
+          <section class="project-detail"><h4>APPROACH</h4><p>${project.approach}</p></section>
+          <section class="project-detail"><h4>TOOLS</h4><div class="project-tools">${project.tools.map((tool) => `<span class="project-tag magnetic">${tool}</span>`).join("")}</div></section>
+          <section class="project-detail"><h4>CHALLENGES</h4><p>${project.challenges}</p></section>
+          <section class="project-detail"><h4>RESULT</h4><p>${project.result}</p></section>
+          <section class="project-detail"><h4>FIELDS</h4><div class="project-tools">${project.fields.map((field) => `<span class="project-tag">${field}</span>`).join("")}</div></section>
+          <section class="project-detail">
+            <h4>SCREENSHOT</h4>
+            <div class="project-screenshot"><div><strong>PROJECT VISUAL</strong><span>${project.screenshot}</span></div></div>
+          </section>
+          <section class="project-detail">
+            <h4>CODE</h4>
+            <pre class="project-code"><code>${escapeHtml(project.code)}</code></pre>
+          </section>
+        </div>
 
-  observeReveals();
-}
+        <div class="project-output">
+          <span>OUTPUT</span>
+          <strong>${project.output}</strong>
+          <a href="${project.github}" target="_blank" rel="noopener noreferrer">VIEW PROJECT ↗</a>
+        </div>
+      </article>
+    `).join("");
 
-function escapeHtml(value) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-/* ---------- Theme ---------- */
-
-const themeToggle = document.querySelector(".theme-toggle");
-const themeLabel = document.querySelector(".theme-label");
-const root = document.documentElement;
-
-function setTheme(theme) {
-  root.dataset.theme = theme;
-  localStorage.setItem("hagar-theme", theme);
-
-  const dark = theme === "dark";
-
-  themeToggle?.setAttribute(
-    "aria-label",
-    dark ? "Switch to light mode" : "Switch to dark mode"
-  );
-
-  themeToggle?.setAttribute(
-    "aria-pressed",
-    String(dark)
-  );
-
-  if (themeLabel) {
-    themeLabel.textContent = dark ? "Dark" : "Light";
-  }
-}
-
-const storedTheme = localStorage.getItem("hagar-theme");
-
-if (storedTheme) {
-  setTheme(storedTheme);
-} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  setTheme("dark");
-}
-
-themeToggle?.addEventListener("click", () => {
-  setTheme(root.dataset.theme === "dark" ? "light" : "dark");
-});
-
-/* ---------- Reveal on scroll ---------- */
-
-let revealObserver;
-
-function observeReveals() {
-  const items = document.querySelectorAll(".reveal:not(.visible)");
-
-  if (!("IntersectionObserver" in window)) {
-    items.forEach((item) => item.classList.add("visible"));
-    return;
+    if (projectCount) {
+      projectCount.textContent = `${String(projects.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`;
+    }
   }
 
-  if (!revealObserver) {
-    revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -30px 0px"
+  function escapeHtml(value) {
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function loadTheme() {
+    const saved = localStorage.getItem("hagar-theme");
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const theme = saved || (prefersLight ? "light" : "dark");
+    root.dataset.theme = theme;
+    updateThemeButton(theme);
+  }
+
+  function updateThemeButton(theme) {
+    if (!themeToggle) return;
+    const light = theme === "light";
+    themeToggle.setAttribute("aria-pressed", String(light));
+    themeToggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    const label = themeToggle.querySelector(".theme-label");
+    const icon = themeToggle.querySelector(".theme-icon");
+    if (label) label.textContent = light ? "Dark" : "Light";
+    if (icon) icon.textContent = light ? "☼" : "◐";
+  }
+
+  function setupTheme() {
+    if (!themeToggle) return;
+    themeToggle.addEventListener("click", () => {
+      const next = root.dataset.theme === "light" ? "dark" : "light";
+      root.dataset.theme = next;
+      localStorage.setItem("hagar-theme", next);
+      updateThemeButton(next);
+    });
+  }
+
+  function setupIntro() {
+    requestAnimationFrame(() => body.classList.add("loaded"));
+  }
+
+  function setupReveal() {
+    const sections = document.querySelectorAll(".reveal-section");
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -7% 0px" });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  function setupProgress() {
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? window.scrollY / max : 0;
+      if (progress) progress.style.transform = `scaleX(${Math.min(1, Math.max(0, value))})`;
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+  }
+
+  function setupActiveNav() {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    if (!("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  function setupTyping() {
+    if (!typedWord) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const words = ["Python", "SQL", "Data Pipelines", "Clean Data"];
+    if (reduced) {
+      typedWord.textContent = words[0];
+      return;
+    }
+
+    let index = 0;
+    let deleting = false;
+    let current = words[index];
+    let position = current.length;
+
+    const tick = () => {
+      const target = words[index];
+      if (!deleting) {
+        position += 1;
+        typedWord.textContent = target.slice(0, position);
+        if (position === target.length) {
+          deleting = true;
+          setTimeout(tick, 1050);
+          return;
+        }
+      } else {
+        position -= 1;
+        typedWord.textContent = target.slice(0, position);
+        if (position === 0) {
+          deleting = false;
+          index = (index + 1) % words.length;
+          current = words[index];
+          position = 0;
+        }
       }
-    );
+      setTimeout(tick, deleting ? 38 : 70);
+    };
+
+    typedWord.textContent = current;
+    setTimeout(tick, 1150);
   }
 
-  items.forEach((item) => revealObserver.observe(item));
-}
+  function setupImageFallback() {
+    document.querySelectorAll(".image-fallback img").forEach((img) => {
+      img.addEventListener("error", () => img.closest(".image-fallback")?.classList.add("is-broken"), { once: true });
+    });
+  }
 
-renderProjects(projects);
-observeReveals();
+  function setupSpotlight() {
+    if (!spotlight || !window.matchMedia("(pointer: fine)").matches) return;
+    window.addEventListener("pointermove", (event) => {
+      spotlight.style.left = `${event.clientX}px`;
+      spotlight.style.top = `${event.clientY}px`;
+      spotlight.style.opacity = "1";
+    }, { passive: true });
+    document.addEventListener("mouseleave", () => { spotlight.style.opacity = "0"; });
+  }
+
+  function setupTilt() {
+    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(".project-tilt").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(1100px) rotateX(${(-y * 2.4).toFixed(2)}deg) rotateY(${(x * 2.8).toFixed(2)}deg)`;
+      });
+      card.addEventListener("pointerleave", () => { card.style.transform = "perspective(1100px) rotateX(0) rotateY(0)"; });
+    });
+  }
+
+  function setupMagnetic() {
+    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(".magnetic").forEach((element) => {
+      element.addEventListener("pointermove", (event) => {
+        const rect = element.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        element.style.transform = `translate(${(x * 0.1).toFixed(2)}px, ${(y * 0.1).toFixed(2)}px)`;
+      });
+      element.addEventListener("pointerleave", () => { element.style.transform = "translate(0, 0)"; });
+    });
+  }
+
+  renderProjects();
+  loadTheme();
+  setupTheme();
+  setupIntro();
+  setupReveal();
+  setupProgress();
+  setupActiveNav();
+  setupTyping();
+  setupImageFallback();
+  setupSpotlight();
+  setupTilt();
+  setupMagnetic();
+})();
