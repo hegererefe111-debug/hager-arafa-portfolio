@@ -264,6 +264,7 @@
       const y = window.scrollY;
       const vh = window.innerHeight;
       if (bar) bar.classList.toggle('is-stuck', y > 8);
+      if (ruler) ruler.classList.toggle('is-on', y > innerHeight * 0.5);
 
       // Ruler progress
       const max = document.documentElement.scrollHeight - vh;
@@ -362,7 +363,7 @@
 
   // If the photo is missing, the frame shows the initials instead of a broken icon
   function initPortrait() {
-    const frame = $('.portrait__frame');
+    const frame = $('.arch');
     const img = frame && $('img', frame);
     if (!img) return;
     const fail = () => frame.classList.add('no-photo');
