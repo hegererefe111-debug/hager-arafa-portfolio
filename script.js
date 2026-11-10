@@ -1,336 +1,389 @@
-/* Hagar Arafa Portfolio — vanilla JS only. */
+/* ==========================================================================
+   Hagar Arafa, portfolio
+   --------------------------------------------------------------------------
+   Everything here is behaviour. The words live in index.html.
+
+   Sections of this file:
+   1. Setup and helpers
+   2. Page-load reveal
+   3. Hero contour map (the signature animation)
+   4. Header, menu and section ruler
+   5. Work accordion
+   6. Path timeline, scroll reveals, copy-email, footer year
+   ========================================================================== */
 
 (() => {
-  "use strict";
+  'use strict';
 
+  /* ---------- 1. Setup and helpers ---------- */
   const root = document.documentElement;
-  const body = document.body;
-  const topbar = document.getElementById("topbar");
-  const themeToggle = document.getElementById("themeToggle");
-  const projectList = document.getElementById("projectList");
-  const projectCount = document.getElementById("projectCount");
-  const progress = document.querySelector(".scroll-progress span");
-  const spotlight = document.querySelector(".cursor-spotlight");
-  const typedWord = document.getElementById("typedWord");
-  const navLinks = [...document.querySelectorAll('.nav-row a[href^="#"]')];
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  const projects = [
-    {
-      number: "01",
-      year: "2026",
-      category: "PYTHON · SELENIUM · PANDAS",
-      title: "Naukrigulf",
-      subtitle: "Data Engineer Job Scraper",
-      description: "A Selenium-based scraper built to collect Data Engineer job listings from the first three Naukrigulf result pages, open individual listings, extract the full job description, and produce a structured CSV dataset.",
-      problem: "Collect job-market records from the first three result pages and preserve the listing details in a structured dataset.",
-      approach: "Search for Data Engineer listings, collect the first three result pages, open each listing, extract the full description, assemble the records, and export the final dataset as CSV.",
-      tools: ["Python", "Selenium", "Pandas", "undetected-chromedriver"],
-      challenges: "Handling dynamic pages, pagination, individual listing navigation, and keeping the extracted records consistent while the browser moves between result pages and job pages.",
-      result: "The resulting CSV provides a structured dataset that can be inspected, filtered, and used as a starting point for further data processing or analysis.",
-      stats: [
-        ["90", "job listings"],
-        ["03", "result pages"],
-        ["06", "structured fields"]
-      ],
-      fields: ["job title", "company", "location", "experience", "job URL", "description"],
-      output: "naukrigulf_data_engineer.csv",
-      github: "https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper",
-      screenshot: "",
-      code: `jobs = driver.find_elements(\n    "css selector",\n    "div.ng-box.srp-tuple"\n)\n\nfor job in jobs:\n    title = job.find_element(\n        "css selector", "p.designation-title"\n    ).text\n    # extract fields, open listing,\n    # then collect the full description`
-    }
-  ];
-
-  function renderProjects() {
-    if (!projectList) return;
-
-    projectList.innerHTML = projects.map((project) => {
-      const screenshotMarkup = project.screenshot?.trim()
-        ? `
-          <section class="project-detail">
-            <h4>SCREENSHOT</h4>
-            <div class="project-screenshot"><div><strong>PROJECT VISUAL</strong><span>${project.screenshot}</span></div></div>
-          </section>`
-        : "";
-
-      return `
-        <article class="project-card project-tilt reveal-child">
-          <div class="project-top">
-            <span>${project.category}</span>
-            <span>${project.year}</span>
-          </div>
-
-          <div class="project-main">
-            <div class="project-title">
-              <span class="project-number">${project.number}</span>
-              <h3>${project.title}<br><em>${project.subtitle}</em></h3>
-            </div>
-            <div class="project-description">
-              <p>${project.description}</p>
-              <div class="project-links">
-                <a class="project-button primary magnetic" href="${project.github}" target="_blank" rel="noopener noreferrer">GitHub repository <span aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-grid" aria-label="Project summary">
-            ${project.stats.map(([value, label]) => `<div class="project-stat"><strong>${value}</strong><span>${label}</span></div>`).join("")}
-          </div>
-
-          <div class="project-details">
-            <section class="project-detail"><h4>PROBLEM</h4><p>${project.problem}</p></section>
-            <section class="project-detail"><h4>APPROACH</h4><p>${project.approach}</p></section>
-            <section class="project-detail"><h4>TOOLS</h4><div class="project-tools">${project.tools.map((tool) => `<span class="project-tag magnetic">${tool}</span>`).join("")}</div></section>
-            <section class="project-detail"><h4>CHALLENGES</h4><p>${project.challenges}</p></section>
-            <section class="project-detail"><h4>RESULT</h4><p>${project.result}</p></section>
-            <section class="project-detail"><h4>FIELDS</h4><div class="project-tools">${project.fields.map((field) => `<span class="project-tag">${field}</span>`).join("")}</div></section>
-            ${screenshotMarkup}
-            <section class="project-detail">
-              <h4>CODE</h4>
-              <pre class="project-code"><code>${escapeHtml(project.code)}</code></pre>
-            </section>
-          </div>
-
-          <div class="project-output">
-            <span>OUTPUT</span>
-            <strong>${project.output}</strong>
-            <a href="${project.github}" target="_blank" rel="noopener noreferrer">VIEW PROJECT ↗</a>
-          </div>
-        </article>
-      `;
-    }).join("");
-
-    if (projectCount) {
-      projectCount.textContent = `${String(projects.length).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}`;
-    }
-  }
-
-  function escapeHtml(value) {
-    return value
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function loadTheme() {
-    const saved = localStorage.getItem("hagar-theme");
-    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-    const theme = saved || (prefersLight ? "light" : "dark");
-    root.dataset.theme = theme;
-    updateThemeButton(theme);
-  }
-
-  function updateThemeButton(theme) {
-    if (!themeToggle) return;
-    const light = theme === "light";
-    themeToggle.setAttribute("aria-pressed", String(light));
-    themeToggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
-    const label = themeToggle.querySelector(".theme-label");
-    const icon = themeToggle.querySelector(".theme-icon");
-    if (label) label.textContent = light ? "Dark" : "Light";
-    if (icon) icon.textContent = light ? "☼" : "◐";
-  }
-
-  function setupTheme() {
-    if (!themeToggle) return;
-    themeToggle.addEventListener("click", () => {
-      const next = root.dataset.theme === "light" ? "dark" : "light";
-      root.dataset.theme = next;
-      localStorage.setItem("hagar-theme", next);
-      updateThemeButton(next);
+  /* ---------- 2. Page-load reveal ----------
+     The name and intro stay hidden until the fonts are loaded, so the page
+     never flashes in a fallback font. We wait at most 1.2 seconds. */
+  function revealPage() {
+    const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    const timeout = new Promise((resolve) => setTimeout(resolve, 1200));
+    Promise.race([fontsReady, timeout]).then(() => {
+      requestAnimationFrame(() => root.classList.add('is-ready'));
     });
   }
 
-  function setupIntro() {
-    requestAnimationFrame(() => body.classList.add("loaded"));
-  }
+  /* ---------- 3. Hero contour map ----------
+     A topographic map drawn live. We build a smooth "height" for every
+     point on a grid, then trace the lines where the height crosses fixed
+     levels (an algorithm called marching squares). The height slowly
+     drifts over time and bends toward the mouse. */
+  function initField(canvas) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  function setupReveal() {
-    const sections = document.querySelectorAll(".reveal-section");
-    if (!("IntersectionObserver" in window)) {
-      sections.forEach((section) => section.classList.add("is-visible"));
-      return;
+    const lineRGB = (getComputedStyle(canvas).getPropertyValue('--field') || '13, 101, 117').trim();
+    let W = 0, H = 0, dpr = 1, cell = 14, cols = 0, rows = 0, values = new Float32Array(0);
+    let running = false, last = 0, raf = 0;
+    const pointer = { x: 0.72, y: 0.4, tx: 0.72, ty: 0.4, active: false };
+
+    // Horizontal fade: faint behind the name on the left, full strength on the right
+    let fade = null;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      W = Math.max(1, rect.width);
+      H = Math.max(1, rect.height);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cell = clamp(Math.round(W / 96), 11, 18);
+      cols = Math.ceil(W / cell) + 2;
+      rows = Math.ceil(H / cell) + 2;
+      values = new Float32Array(cols * rows);
+      fade = ctx.createLinearGradient(0, 0, W, 0);
+      const narrow = W < 700;
+      fade.addColorStop(0, `rgba(0,0,0,${narrow ? 0.55 : 0.14})`);
+      fade.addColorStop(0.5, `rgba(0,0,0,${narrow ? 0.65 : 0.7})`);
+      fade.addColorStop(1, 'rgba(0,0,0,1)');
+      if (!running) draw(4);
     }
 
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target);
+    // The height at a point (x, y in 0..size units) at time t
+    function height(u, v, t) {
+      let h = 0;
+      h += 0.55 * Math.sin(u * 3.1 + t * 0.11 + Math.sin(v * 2.3 - t * 0.07) * 1.2);
+      h += 0.45 * Math.sin(v * 3.6 - t * 0.09 + Math.cos(u * 2.1 + t * 0.05) * 1.4);
+      h += 0.3 * Math.sin((u + v) * 2.2 + t * 0.06);
+      return h;
+    }
+
+    function fill(t) {
+      const size = Math.max(W, H);
+      // Two fixed "hills" give the map a clear focal point on the right
+      const aspect = W / size;
+      const hills = [
+        [aspect * 0.8, (H / size) * 0.42, 1.25, 0.2],
+        [aspect * 0.95, (H / size) * 0.86, 0.85, 0.15],
+        [aspect * 0.55, (H / size) * 0.15, 0.6, 0.14],
+      ];
+      const px = pointer.x * aspect;
+      const py = pointer.y * (H / size);
+      for (let j = 0; j < rows; j++) {
+        const v = (j * cell) / size;
+        for (let i = 0; i < cols; i++) {
+          const u = (i * cell) / size;
+          let h = height(u, v, t);
+          for (let k = 0; k < hills.length; k++) {
+            const dx = u - hills[k][0];
+            const dy = v - hills[k][1];
+            h += hills[k][2] * Math.exp(-(dx * dx + dy * dy) / (hills[k][3] * hills[k][3]));
+          }
+          if (pointer.active) {
+            const dx = u - px;
+            const dy = v - py;
+            h += 0.55 * Math.exp(-(dx * dx + dy * dy) / 0.02);
+          }
+          values[j * cols + i] = h;
         }
-      });
-    }, { threshold: 0.14, rootMargin: "0px 0px -7% 0px" });
-
-    sections.forEach((section) => observer.observe(section));
-  }
-
-  function setupProgress() {
-    const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const value = max > 0 ? window.scrollY / max : 0;
-      if (progress) progress.style.transform = `scaleX(${Math.min(1, Math.max(0, value))})`;
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
-  }
-
-  function setupHeader() {
-    if (!topbar) return;
-
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastY;
-
-      if (currentY <= 10) {
-        topbar.classList.remove("nav-hidden");
-      } else if (delta > 4 && currentY > 90) {
-        topbar.classList.add("nav-hidden");
-      } else if (delta < -4) {
-        topbar.classList.remove("nav-hidden");
       }
+    }
 
-      lastY = currentY;
-      ticking = false;
-    };
+    // Trace one level and add its line segments to a path
+    function trace(level, path) {
+      for (let j = 0; j < rows - 1; j++) {
+        const y0 = j * cell;
+        for (let i = 0; i < cols - 1; i++) {
+          const x0 = i * cell;
+          const tl = values[j * cols + i];
+          const tr = values[j * cols + i + 1];
+          const br = values[(j + 1) * cols + i + 1];
+          const bl = values[(j + 1) * cols + i];
+          const idx = (tl > level ? 8 : 0) | (tr > level ? 4 : 0) | (br > level ? 2 : 0) | (bl > level ? 1 : 0);
+          if (idx === 0 || idx === 15) continue;
 
-    window.addEventListener("scroll", () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    }, { passive: true });
+          // Where the level crosses each edge of this cell
+          const top = [x0 + (cell * (level - tl)) / (tr - tl), y0];
+          const right = [x0 + cell, y0 + (cell * (level - tr)) / (br - tr)];
+          const bottom = [x0 + (cell * (level - bl)) / (br - bl), y0 + cell];
+          const left = [x0, y0 + (cell * (level - tl)) / (bl - tl)];
+          const seg = (a, b) => { path.moveTo(a[0], a[1]); path.lineTo(b[0], b[1]); };
+
+          switch (idx) {
+            case 1: case 14: seg(left, bottom); break;
+            case 2: case 13: seg(bottom, right); break;
+            case 3: case 12: seg(left, right); break;
+            case 4: case 11: seg(top, right); break;
+            case 6: case 9: seg(top, bottom); break;
+            case 7: case 8: seg(left, top); break;
+            case 5:
+            case 10: {
+              // Ambiguous corner: decide using the average of the four corners
+              const centreHigh = (tl + tr + br + bl) / 4 > level;
+              if ((idx === 5) === centreHigh) { seg(left, top); seg(bottom, right); }
+              else { seg(top, right); seg(left, bottom); }
+              break;
+            }
+            default: break;
+          }
+        }
+      }
+    }
+
+    function draw(t) {
+      fill(t);
+      ctx.clearRect(0, 0, W, H);
+      const thin = new Path2D();
+      const index = new Path2D();
+      const start = -1.45;
+      const step = 0.2;
+      for (let n = 0; n < 17; n++) {
+        trace(start + n * step, n % 4 === 0 ? index : thin);
+      }
+      ctx.lineWidth = 1;
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = `rgba(${lineRGB}, 0.2)`;
+      ctx.stroke(thin);
+      ctx.strokeStyle = `rgba(${lineRGB}, 0.5)`;
+      ctx.stroke(index);
+
+      // Apply the left-to-right fade
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function frame(now) {
+      if (!running) return;
+      raf = requestAnimationFrame(frame);
+      if (now - last < 33) return; // about 30 frames per second is plenty
+      last = now;
+      pointer.x += (pointer.tx - pointer.x) * 0.06;
+      pointer.y += (pointer.ty - pointer.y) * 0.06;
+      draw(now / 1000);
+    }
+
+    function start() {
+      if (running || reduceMotion) return;
+      running = true;
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    resize();
+    window.addEventListener('resize', () => { resize(); });
+
+    if (reduceMotion) return; // one still frame is enough
+
+    // Run only while the hero is visible and the tab is open
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries[0].isIntersecting && !document.hidden ? start() : stop();
+      });
+      io.observe(canvas);
+    } else {
+      start();
+    }
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+    if (finePointer) {
+      const hero = canvas.parentElement;
+      hero.addEventListener('pointermove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        pointer.tx = clamp((e.clientX - rect.left) / rect.width, 0, 1);
+        pointer.ty = clamp((e.clientY - rect.top) / rect.height, 0, 1);
+        pointer.active = true;
+      });
+      hero.addEventListener('pointerleave', () => { pointer.active = false; });
+    }
   }
 
-  function setupActiveNav() {
-    const sections = navLinks
-      .map((link) => document.querySelector(link.getAttribute("href")))
+  /* ---------- 4. Header, menu and section ruler ---------- */
+  function initChrome() {
+    const bar = $('#bar');
+    const menu = $('#menu');
+    const menuBtn = $('.menu-btn');
+    const label = $('.menu-btn__label');
+
+    // Menu: open and close
+    function setMenu(open) {
+      if (!menu || !menuBtn) return;
+      menu.hidden = !open;
+      menuBtn.setAttribute('aria-expanded', String(open));
+      if (label) label.textContent = open ? 'Close' : 'Menu';
+      document.body.classList.toggle('menu-open', open);
+    }
+    if (menuBtn && menu) {
+      menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+      menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuBtn.focus(); }
+      });
+      window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+    }
+
+    // Ruler: which section are we in, and how far down the page are we
+    const ruler = $('#ruler');
+    const fillEl = $('#rulerFill');
+    const sections = ['top', 'about', 'work', 'toolbox', 'path', 'contact']
+      .map((id) => document.getElementById(id))
       .filter(Boolean);
+    const rulerLinks = new Map($$('[data-ruler]').map((a) => [a.dataset.ruler, a]));
+    const pathList = $('#pathList');
+    const pathItems = $$('.path__item');
+    let currentId = '';
 
-    if (!("IntersectionObserver" in window)) return;
+    function onScroll() {
+      const y = window.scrollY;
+      const vh = window.innerHeight;
+      if (bar) bar.classList.toggle('is-stuck', y > 8);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach((link) => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
-      });
-    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+      // Ruler progress
+      const max = document.documentElement.scrollHeight - vh;
+      if (fillEl) fillEl.style.setProperty('--p', max > 0 ? clamp(y / max, 0, 1).toFixed(4) : 0);
 
-    sections.forEach((section) => observer.observe(section));
-  }
-
-  function setupTyping() {
-    if (!typedWord) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const words = ["Python", "SQL", "Data Pipelines", "Clean Data"];
-    if (reduced) {
-      typedWord.textContent = words[0];
-      return;
-    }
-
-    let index = 0;
-    let deleting = false;
-    let position = words[index].length;
-
-    const tick = () => {
-      const target = words[index];
-      if (!deleting) {
-        position += 1;
-        typedWord.textContent = target.slice(0, position);
-        if (position === target.length) {
-          deleting = true;
-          setTimeout(tick, 1050);
-          return;
-        }
-      } else {
-        position -= 1;
-        typedWord.textContent = target.slice(0, position);
-        if (position === 0) {
-          deleting = false;
-          index = (index + 1) % words.length;
-          position = 0;
-        }
+      // Active section = the one crossing the middle of the viewport
+      let active = sections[0];
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top <= vh * 0.5) active = s;
       }
-      setTimeout(tick, deleting ? 38 : 70);
-    };
+      if (active && active.id !== currentId) {
+        currentId = active.id;
+        rulerLinks.forEach((a, id) => (id === currentId ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+        if (ruler) ruler.classList.toggle('on-dark', active.dataset.theme === 'dark');
+      }
 
-    typedWord.textContent = words[index];
-    setTimeout(tick, 1150);
-  }
-
-  function setupImageFallback() {
-    document.querySelectorAll(".image-fallback img").forEach((img) => {
-      img.addEventListener("error", () => img.closest(".image-fallback")?.classList.add("is-broken"), { once: true });
-    });
-  }
-
-  function setupPipelineMotion() {
-    const visual = document.querySelector(".pipeline-visual");
-    if (!visual) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const update = () => {
-      visual.style.setProperty("--packet-travel-x", `${visual.clientWidth * 0.815}px`);
-      visual.style.setProperty("--packet-travel-y", `${visual.clientHeight * 0.825}px`);
-    };
-
-    update();
-    window.addEventListener("resize", update, { passive: true });
-  }
-
-  function setupSpotlight() {
-    if (!spotlight || !window.matchMedia("(pointer: fine)").matches) return;
-    window.addEventListener("pointermove", (event) => {
-      spotlight.style.left = `${event.clientX}px`;
-      spotlight.style.top = `${event.clientY}px`;
-      spotlight.style.opacity = "1";
+      // Path timeline: the line draws as you read down it
+      if (pathList) {
+        const r = pathList.getBoundingClientRect();
+        const p = clamp((vh * 0.62 - r.top) / r.height, 0, 1);
+        pathList.style.setProperty('--p', p.toFixed(4));
+        pathItems.forEach((item) => {
+          item.classList.toggle('is-on', item.getBoundingClientRect().top < vh * 0.62);
+        });
+      }
+    }
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); }
     }, { passive: true });
-    document.addEventListener("mouseleave", () => { spotlight.style.opacity = "0"; });
+    window.addEventListener('resize', onScroll);
+    onScroll();
   }
 
-  function setupTilt() {
-    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    document.querySelectorAll(".project-tilt").forEach((card) => {
-      card.addEventListener("pointermove", (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(1100px) rotateX(${(-y * 2.4).toFixed(2)}deg) rotateY(${(x * 2.8).toFixed(2)}deg)`;
+  /* ---------- 5. Work accordion ----------
+     One project open at a time. The first one starts open. */
+  function initRows() {
+    const rows = $$('.row');
+    if (!rows.length) return;
+    const set = (row, open) => {
+      row.classList.toggle('is-open', open);
+      const btn = $('.row__head', row);
+      if (btn) btn.setAttribute('aria-expanded', String(open));
+    };
+    rows.forEach((row) => {
+      const btn = $('.row__head', row);
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const willOpen = !row.classList.contains('is-open');
+        rows.forEach((r) => set(r, false));
+        set(row, willOpen);
       });
-      card.addEventListener("pointerleave", () => { card.style.transform = "perspective(1100px) rotateX(0) rotateY(0)"; });
+    });
+    set(rows[0], true);
+  }
+
+  /* ---------- 6. Scroll reveals, copy email, footer year ---------- */
+  function initReveals() {
+    const targets = $$('.section .h2, .split__note, .portrait, .prose, .rows, .schema, .path, .contact__title, .contact__lede, .contact__mail, .contact__links');
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    targets.forEach((el) => el.setAttribute('data-reveal', ''));
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    targets.forEach((el) => io.observe(el));
+    // Safety net: never leave content hidden
+    setTimeout(() => targets.forEach((el) => el.classList.add('in')), 6000);
+  }
+
+  function initCopy() {
+    const btn = $('#copyMail');
+    const mail = $('#mail');
+    if (!btn || !mail) return;
+    const address = mail.textContent.trim();
+    btn.addEventListener('click', async () => {
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(address);
+        ok = true;
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = address;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        ta.remove();
+      }
+      btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
     });
   }
 
-  function setupMagnetic() {
-    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    document.querySelectorAll(".magnetic").forEach((element) => {
-      element.addEventListener("pointermove", (event) => {
-        const rect = element.getBoundingClientRect();
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
-        element.style.transform = `translate(${(x * 0.1).toFixed(2)}px, ${(y * 0.1).toFixed(2)}px)`;
-      });
-      element.addEventListener("pointerleave", () => { element.style.transform = "translate(0, 0)"; });
-    });
+  // If the photo is missing, the frame shows the initials instead of a broken icon
+  function initPortrait() {
+    const frame = $('.portrait__frame');
+    const img = frame && $('img', frame);
+    if (!img) return;
+    const fail = () => frame.classList.add('no-photo');
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('loading') !== 'lazy') fail();
+    img.addEventListener('error', fail);
   }
 
-  renderProjects();
-  loadTheme();
-  setupTheme();
-  setupIntro();
-  setupReveal();
-  setupProgress();
-  setupHeader();
-  setupActiveNav();
-  setupTyping();
-  setupImageFallback();
-  setupPipelineMotion();
-  setupSpotlight();
-  setupTilt();
-  setupMagnetic();
+  /* ---------- Start ---------- */
+  function init() {
+    const year = $('#year');
+    if (year) year.textContent = String(new Date().getFullYear());
+    initRows();
+    initChrome();
+    initPortrait();
+    initCopy();
+    initReveals();
+    initField($('#field'));
+    initField($('#field2'));
+    revealPage();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

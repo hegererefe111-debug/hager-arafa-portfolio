@@ -1,212 +1,388 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Hagar Arafa — Junior Data Engineer in training. Python, SQL, SQL Server, Pandas and Selenium.">
-  <meta name="theme-color" content="#0B1020">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hagar Arafa — Junior Data Engineer">
-  <meta property="og:description" content="Hagar Arafa — Junior Data Engineer in training, building practical foundations in Python, SQL and data processing.">
-  <meta property="og:url" content="https://hager-arafa-portfolio.vercel.app/">
-  <meta property="og:image" content="https://hager-arafa-portfolio.vercel.app/assets/photo.jpg">
-  <meta property="og:image:alt" content="Portrait of Hagar Arafa">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hagar Arafa — Junior Data Engineer">
-  <meta name="twitter:description" content="Hagar Arafa — Junior Data Engineer in training, building practical foundations in Python, SQL and data processing.">
-  <meta name="twitter:image" content="https://hager-arafa-portfolio.vercel.app/assets/photo.jpg">
-  <title>Hagar Arafa — Junior Data Engineer</title>
-  <link rel="icon" href="assets/ha-mark.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="cursor-spotlight" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <title>Hagar Arafa | Junior Data Engineer</title>
+  <meta name="description" content="Hagar Arafa is a junior data engineer in Alexandria, Egypt. She builds ETL workflows with SQL Server, SSIS and Python. See selected work and get in touch.">
+  <meta name="author" content="Hagar Arafa">
+  <meta name="theme-color" content="#E9EEEB">
+  <link rel="canonical" href="https://hager-arafa-portfolio.vercel.app/">
 
-  <header class="topbar" id="topbar">
-    <div class="topbar-main">
-      <a class="identity" href="#home" aria-label="Hagar Arafa home">
-        <span class="monogram" aria-hidden="true">HA</span>
-        <span>Hagar Arafa</span>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hagar Arafa | Junior Data Engineer">
+  <meta property="og:description" content="ETL workflows with SQL Server, SSIS and Python. Selected work from Alexandria, Egypt.">
+  <meta property="og:url" content="https://hager-arafa-portfolio.vercel.app/">
+  <meta property="og:image" content="https://hager-arafa-portfolio.vercel.app/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/lm-display.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    /* Tells the CSS that JavaScript is running, so animations only
+       start when they can actually finish. */
+    document.documentElement.className = 'js';
+    /* Safety net: if script.js ever fails to load, show the page anyway. */
+    setTimeout(function () { document.documentElement.classList.add('is-ready'); }, 3500);
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hagar Arafa",
+      "jobTitle": "Junior Data Engineer",
+      "url": "https://hager-arafa-portfolio.vercel.app/",
+      "address": { "@type": "PostalAddress", "addressLocality": "Alexandria", "addressCountry": "EG" },
+      "alumniOf": "Kafrelsheikh University"
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Logo, drawn once and reused. The crossbars of the H and the A are sine waves. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="mark" viewBox="0 0 72 64">
+      <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12V52M32 12V52"/>
+        <path class="mark__wave" d="M10 32C14 24 18 24 21 32S28 40 32 32"/>
+        <path d="M32 52L47 12L62 52"/>
+        <path class="mark__wave" d="M36.5 40C40 34 43 34 47 40S54 46 57.5 40"/>
+      </g>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 16 16">
+      <path d="M4 12L12 4M5.5 4H12V10.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="down" viewBox="0 0 16 16">
+      <path d="M8 3V12M4 8.5L8 12.5L12 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar" id="bar">
+    <div class="bar__inner wrap">
+      <a class="brand" href="#top" aria-label="Hagar Arafa, back to top">
+        <svg class="brand__mark" aria-hidden="true"><use href="#mark"/></svg>
+        <span class="brand__name">Hagar Arafa</span>
       </a>
 
-      <div class="top-actions">
-        <a class="cv-link magnetic" href="assets/Hagar-Arafa-CV.pdf" download aria-label="Download Hagar Arafa CV">CV <span aria-hidden="true">↗</span></a>
-        <button class="theme-toggle magnetic" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
-          <span class="theme-icon" aria-hidden="true">◐</span>
-          <span class="theme-label">Light</span>
+      <nav class="bar__nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#toolbox">Toolbox</a>
+        <a href="#path">Path</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="bar__end">
+        <a class="pill" href="assets/Hagar-Arafa-CV.pdf" download>
+          <span>CV</span>
+          <svg aria-hidden="true"><use href="#down"/></svg>
+        </a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="menu-btn__label">Menu</span>
         </button>
       </div>
     </div>
-
-    <nav class="nav-row" id="navRow" aria-label="Primary navigation">
-      <div class="nav-scroll">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
   </header>
 
-  <main>
-    <section id="home" class="hero section-shell" aria-labelledby="hero-title">
-      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
-      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+  <!-- Full-screen menu, phones and tablets only -->
+  <div class="menu" id="menu" hidden>
+    <nav class="menu__nav" aria-label="Mobile">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#path">Path</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 
-      <div class="hero-copy reveal-on-load">
-        <p class="eyebrow intro-item">ALEXANDRIA, EGYPT <span class="eyebrow-line" aria-hidden="true"></span> 2026</p>
-        <h1 id="hero-title" class="hero-title masked-heading intro-item"><span>Hagar</span><span><em>Arafa.</em></span></h1>
-        <div class="hero-role intro-item">
-          <span>Junior Data Engineer</span>
-          <span class="role-dot" aria-hidden="true"></span>
-          <span class="typing-line" aria-live="polite"><span id="typedWord">Python</span></span>
-        </div>
-        <p class="hero-description intro-item">I’m building practical foundations in data engineering through Python, SQL, databases, and data processing.</p>
-        <div class="hero-actions intro-item">
-          <a class="button button-primary magnetic" href="#projects">View selected work <span aria-hidden="true">↗</span></a>
-          <a class="text-link magnetic" href="assets/Hagar-Arafa-CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
-        </div>
-      </div>
+  <!-- Section ruler, wide screens only. It is the page's navigation and progress. -->
+  <nav class="ruler" id="ruler" aria-label="Page sections">
+    <span class="ruler__line" aria-hidden="true"><span class="ruler__fill" id="rulerFill"></span></span>
+    <ul>
+      <li><a href="#top" data-ruler="top"><span>Intro</span></a></li>
+      <li><a href="#about" data-ruler="about"><span>About</span></a></li>
+      <li><a href="#work" data-ruler="work"><span>Work</span></a></li>
+      <li><a href="#toolbox" data-ruler="toolbox"><span>Toolbox</span></a></li>
+      <li><a href="#path" data-ruler="path"><span>Path</span></a></li>
+      <li><a href="#contact" data-ruler="contact"><span>Contact</span></a></li>
+    </ul>
+  </nav>
 
-      <div class="hero-visual reveal-on-load" aria-label="Portrait and data pipeline visual">
-        <div class="portrait-frame image-fallback">
-          <img src="assets/photo.jpg" alt="Portrait of Hagar Arafa" loading="eager" decoding="async">
-          <div class="portrait-overlay" aria-hidden="true"></div>
-          <span class="portrait-label">HAGAR ARAFA / DATA ENGINEERING</span>
-        </div>
+  <main id="main">
 
-        <div class="pipeline-card" aria-label="Extract Transform Load pipeline">
-          <div class="pipeline-head">
-            <span>DATA FLOW</span>
-            <span>ETL</span>
-          </div>
-          <div class="pipeline-visual">
-            <svg class="pipeline-svg pipeline-svg-horizontal" viewBox="0 0 540 100" role="img" aria-label="Extract to Transform to Load pipeline">
-              <path class="pipeline-track" d="M50 50 H490"></path>
-              <circle class="pipeline-node" cx="50" cy="50" r="6"></circle>
-              <circle class="pipeline-node" cx="270" cy="50" r="6"></circle>
-              <circle class="pipeline-node" cx="490" cy="50" r="6"></circle>
-            </svg>
-            <div class="pipeline-labels pipeline-labels-horizontal" aria-hidden="true">
-              <span><b>EXTRACT</b><small>source</small></span>
-              <span><b>TRANSFORM</b><small>clean</small></span>
-              <span><b>LOAD</b><small>ready</small></span>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top" data-theme="light">
+      <canvas class="hero__field" id="field" aria-hidden="true"></canvas>
+
+      <div class="wrap hero__inner">
+        <p class="hero__kicker reveal-up" style="--i:0">Junior data engineer, Alexandria</p>
+
+        <h1 class="hero__name" aria-label="Hagar Arafa">
+          <span class="line" aria-hidden="true"><span>Hagar</span></span>
+          <span class="line line--indent" aria-hidden="true"><span>Arafa</span></span>
+        </h1>
+
+        <div class="hero__foot">
+          <div class="hero__intro">
+            <p class="hero__lede reveal-up" style="--i:3">I build ETL workflows that turn raw files and API data into structured, queryable databases, using SQL Server, SSIS and Python.</p>
+            <div class="hero__actions reveal-up" style="--i:4">
+              <a class="btn btn--solid" href="#work">
+                <span>See selected work</span>
+                <svg aria-hidden="true"><use href="#arrow"/></svg>
+              </a>
+              <a class="link" href="assets/Hagar-Arafa-CV.pdf" download>Download CV</a>
             </div>
-            <span class="data-packet packet-horizontal packet-one" aria-hidden="true"></span>
-            <span class="data-packet packet-horizontal packet-two" aria-hidden="true"></span>
+          </div>
 
-            <svg class="pipeline-svg pipeline-svg-vertical" viewBox="0 0 160 250" aria-hidden="true">
-              <path class="pipeline-track" d="M80 25 V225"></path>
-              <circle class="pipeline-node" cx="80" cy="25" r="6"></circle>
-              <circle class="pipeline-node" cx="80" cy="125" r="6"></circle>
-              <circle class="pipeline-node" cx="80" cy="225" r="6"></circle>
-            </svg>
-            <div class="pipeline-labels pipeline-labels-vertical" aria-hidden="true">
-              <span><b>EXTRACT</b><small>source</small></span>
-              <span><b>TRANSFORM</b><small>clean</small></span>
-              <span><b>LOAD</b><small>ready</small></span>
+          <dl class="facts reveal-up" style="--i:5">
+            <div><dt>Based in</dt><dd>Alexandria, Egypt</dd></div>
+            <div><dt>Training</dt><dd>DEPI Data Engineering Track</dd></div>
+            <div><dt>Open to</dt><dd>Junior data engineering roles</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about" data-theme="light">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2 class="h2">I look for the structure in messy things.</h2>
+
+          <figure class="portrait">
+            <div class="portrait__frame">
+              <span class="portrait__fallback" aria-hidden="true">HA</span>
+              <img src="assets/hager-arafa.jpg" alt="Portrait of Hagar Arafa" width="352" height="440" loading="lazy" decoding="async">
             </div>
-            <span class="data-packet packet-vertical packet-three" aria-hidden="true"></span>
-            <span class="data-packet packet-vertical packet-four" aria-hidden="true"></span>
-          </div>
+            <figcaption>Hagar, Alexandria</figcaption>
+          </figure>
+        </div>
+
+        <div class="split__body prose">
+          <p class="prose__lead">I graduated in mathematics and taught it online for about two years. The work was about breaking a hard problem into clear steps, then using learner data to see where people were getting stuck.</p>
+          <p>It is the same habit I bring to databases and pipelines. I’m now in the Digital Egypt Pioneers Initiative (DEPI) Data Engineering track. I have built an SSIS ETL project and Python data-collection scripts, and I’m working on a team graduation project: a geospatial database for coastal erosion and risk mapping.</p>
+          <p>I care about the unglamorous parts that make data trustworthy: clean inputs, clear schemas and workflows that run the same way every time.</p>
         </div>
       </div>
     </section>
 
-    <section class="intro-strip" aria-label="Portfolio introduction">
-      <p>Selected work, technical foundations<br>and the path behind them.</p>
-      <a href="#about" class="scroll-cue magnetic">SCROLL <span aria-hidden="true">↓</span></a>
-    </section>
-
-    <section id="about" class="section-shell content-section reveal-section" aria-labelledby="about-title">
-      <div class="section-index">01</div>
-      <div class="section-heading masked-heading">
-        <p class="eyebrow">ABOUT</p>
-        <h2 id="about-title">A structured mind<br>moving into <em>data.</em></h2>
-      </div>
-      <div class="about-content reveal-child">
-        <p class="lead">I’m Hagar Arafa, a Junior Data Engineer building my foundations through hands-on work with Python, SQL, databases and data processing.</p>
-        <p>My background in mathematics shaped the way I approach problems: break them down, understand the structure, and work toward a clear solution. I’m now applying that mindset to data engineering through the DEPI Data Engineering Track and practical projects.</p>
-        <p>I’m especially interested in the work between raw input and useful data — extraction, transformation, querying, and building workflows that are clear and dependable.</p>
-      </div>
-    </section>
-
-    <section id="skills" class="section-shell content-section skills-section reveal-section" aria-labelledby="skills-title">
-      <div class="section-index">02</div>
-      <div class="section-heading masked-heading">
-        <p class="eyebrow">SKILLS</p>
-        <h2 id="skills-title">The current<br><em>toolset.</em></h2>
-      </div>
-      <div class="skill-list reveal-child">
-        <article class="skill-row"><span>01</span><h3>Python</h3><p>Core Python · Pandas · Requests · JSON · Selenium</p><b aria-hidden="true">↗</b></article>
-        <article class="skill-row"><span>02</span><h3>SQL</h3><p>SQL · T-SQL · Joins · CTEs · Subqueries · Window Functions</p><b aria-hidden="true">↗</b></article>
-        <article class="skill-row"><span>03</span><h3>Databases</h3><p>Microsoft SQL Server · Relational Design · Stored Procedures · Functions · Triggers · Transactions</p><b aria-hidden="true">↗</b></article>
-        <article class="skill-row"><span>04</span><h3>Data Work</h3><p>Data extraction · Cleaning · Transformation · CSV / JSON processing · API workflows</p><b aria-hidden="true">↗</b></article>
-        <article class="skill-row"><span>05</span><h3>Tools</h3><p>Git · GitHub · VS Code · Jupyter Notebook</p><b aria-hidden="true">↗</b></article>
-      </div>
-    </section>
-
-    <section id="projects" class="projects-section reveal-section" aria-labelledby="projects-title">
-      <div class="section-shell projects-shell">
-        <div class="projects-head masked-heading">
-          <div>
-            <p class="eyebrow eyebrow-accent">03 / SELECTED PROJECTS</p>
-            <h2 id="projects-title">Building with<br><em>real data problems.</em></h2>
-          </div>
-          <span class="project-count" id="projectCount">01 / 01</span>
+    <!-- ============ WORK ============ -->
+    <section class="section section--dark" id="work" data-theme="dark">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2 class="h2">Selected work</h2>
+          <p class="split__note">Every project moves data from a source, through a process, to an output you can use.</p>
         </div>
-        <div id="projectList" class="project-list" aria-live="polite"></div>
+
+        <div class="split__body">
+          <ul class="rows" id="rows">
+
+            <!-- TO ADD A PROJECT: copy one whole <li class="row"> ... </li> block,
+                 paste it below the last one, change the text and the ids
+                 (p5-head / p5-panel). Delete a link line if you have no link. -->
+
+            <li class="row">
+              <h3 class="row__title">
+                <button class="row__head" type="button" id="p1-head" aria-expanded="false" aria-controls="p1-panel">
+                  <span class="row__name">Telecom Data Integration</span>
+                  <span class="row__stack">SQL Server · SSIS · ETL</span>
+                  <span class="row__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="row__panel" id="p1-panel" role="region" aria-labelledby="p1-head">
+                <div class="row__clip">
+                  <div class="row__body">
+                    <p class="row__text">A completed ETL project that processes 13 telecom CSV source files. SSIS workflows handle extraction, transformation and loading into SQL Server.</p>
+                    <ol class="flow" aria-label="Data flow">
+                      <li><span class="flow__k">Source</span><span class="flow__v">13 telecom CSV files</span></li>
+                      <li><span class="flow__k">Process</span><span class="flow__v">SSIS workflows</span></li>
+                      <li><span class="flow__k">Output</span><span class="flow__v">SQL Server</span></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="row">
+              <h3 class="row__title">
+                <button class="row__head" type="button" id="p2-head" aria-expanded="false" aria-controls="p2-panel">
+                  <span class="row__name">Shoreline Analytics <span class="badge">In progress</span></span>
+                  <span class="row__stack">PostgreSQL · PostGIS · Docker · Python · GeoPandas</span>
+                  <span class="row__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="row__panel" id="p2-panel" role="region" aria-labelledby="p2-head">
+                <div class="row__clip">
+                  <div class="row__body">
+                    <p class="row__text">Coastal erosion and risk mapping. This is a team graduation project, still in progress. My responsibility is the database design, with geospatial data management and SQL-based risk assessment planned next.</p>
+                    <ol class="flow" aria-label="Project scope">
+                      <li><span class="flow__k">My part</span><span class="flow__v">Database design</span></li>
+                      <li><span class="flow__k">Planned</span><span class="flow__v">Geospatial data management</span></li>
+                      <li><span class="flow__k">Planned</span><span class="flow__v">SQL-based risk assessment</span></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="row">
+              <h3 class="row__title">
+                <button class="row__head" type="button" id="p3-head" aria-expanded="false" aria-controls="p3-panel">
+                  <span class="row__name">Naukrigulf Job Scraper</span>
+                  <span class="row__stack">Python · Selenium · Pandas</span>
+                  <span class="row__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="row__panel" id="p3-panel" role="region" aria-labelledby="p3-head">
+                <div class="row__clip">
+                  <div class="row__body">
+                    <p class="row__text">A Selenium scraper that collects Data Engineer job listings from the first three Naukrigulf result pages, opens each listing for the full description, and exports a structured CSV with job title, company, location, experience, job URL and description.</p>
+                    <ol class="flow" aria-label="Data flow">
+                      <li><span class="flow__k">Source</span><span class="flow__v">3 result pages</span></li>
+                      <li><span class="flow__k">Process</span><span class="flow__v">Selenium and Pandas</span></li>
+                      <li><span class="flow__k">Output</span><span class="flow__v">CSV, 90 listings, 6 fields</span></li>
+                    </ol>
+                    <a class="link link--on-dark" href="https://github.com/hegererefe111-debug/naukrigulf-data-engineer-scraper" target="_blank" rel="noopener noreferrer">View the code on GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="row">
+              <h3 class="row__title">
+                <button class="row__head" type="button" id="p4-head" aria-expanded="false" aria-controls="p4-panel">
+                  <span class="row__name">Job Listings via REST API</span>
+                  <span class="row__stack">Python · Requests · Pandas</span>
+                  <span class="row__icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="row__panel" id="p4-panel" role="region" aria-labelledby="p4-head">
+                <div class="row__clip">
+                  <div class="row__body">
+                    <p class="row__text">Retrieves job-market records from the ArbeitNow public API and processes them with Pandas.</p>
+                    <ol class="flow" aria-label="Data flow">
+                      <li><span class="flow__k">Source</span><span class="flow__v">ArbeitNow public API</span></li>
+                      <li><span class="flow__k">Process</span><span class="flow__v">Requests and Pandas</span></li>
+                      <li><span class="flow__k">Output</span><span class="flow__v">About 250 job records</span></li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="experience" class="section-shell content-section experience-section reveal-section" aria-labelledby="experience-title">
-      <div class="section-index">04</div>
-      <div class="section-heading masked-heading">
-        <p class="eyebrow">EXPERIENCE</p>
-        <h2 id="experience-title">Learning,<br>building,<br><em>explaining.</em></h2>
-      </div>
-      <div class="timeline reveal-child">
-        <article class="timeline-row">
-          <span>2026 — NOW</span>
-          <div><h3>DEPI — Data Engineering Track</h3><p>Currently developing foundations in Python, SQL, T-SQL, Microsoft SQL Server, databases, data processing and data engineering concepts.</p></div>
-        </article>
-        <article class="timeline-row">
-          <span>~2 YEARS</span>
-          <div><h3>Online Mathematics Teacher</h3><p>Online mathematics teaching with an emphasis on structured explanation, analytical thinking and problem solving.</p></div>
-        </article>
-        <article class="timeline-row">
-          <span>2021 — 2025</span>
-          <div><h3>Bachelor of General Mathematics</h3><p>Faculty of Education, Kafrelsheikh University.</p></div>
-        </article>
+    <!-- ============ TOOLBOX ============ -->
+    <section class="section" id="toolbox" data-theme="light">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2 class="h2">Toolbox</h2>
+          <p class="split__note">What I use, grouped by the job it does.</p>
+        </div>
+
+        <div class="split__body">
+          <dl class="schema">
+            <div class="schema__row">
+              <dt>Databases</dt>
+              <dd>Microsoft SQL Server, PostgreSQL, SQL and T-SQL, relational database design, joins, CTEs, subqueries, window functions, stored procedures, triggers, transactions</dd>
+            </div>
+            <div class="schema__row">
+              <dt>ETL and integration</dt>
+              <dd>SSIS, ETL workflows, data extraction, transformation and loading</dd>
+            </div>
+            <div class="schema__row">
+              <dt>Python and data processing</dt>
+              <dd>Python, Pandas, NumPy fundamentals, data cleaning, validation, JSON, CSV</dd>
+            </div>
+            <div class="schema__row">
+              <dt>Data collection</dt>
+              <dd>Python Requests, REST APIs, Selenium, web scraping</dd>
+            </div>
+            <div class="schema__row">
+              <dt>Geospatial <span class="badge badge--light">Learning now</span></dt>
+              <dd>PostGIS, GeoPandas, Docker, pgAdmin</dd>
+            </div>
+            <div class="schema__row">
+              <dt>Everyday tools</dt>
+              <dd>Git, GitHub, VS Code, Jupyter Notebook</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="contact-section reveal-section" aria-labelledby="contact-title">
-      <div class="section-shell contact-shell">
-        <div class="contact-top"><p class="eyebrow">05 / CONTACT</p><span>LET’S TALK ↗</span></div>
-        <div class="contact-body">
-          <div class="masked-heading"><h2 id="contact-title">Let’s build<br><em>something useful.</em></h2></div>
-          <div class="contact-side reveal-child"><p>I’m open to entry-level opportunities, practical data projects and collaboration while I continue growing as a Data Engineer.</p><a class="button button-light magnetic" href="mailto:hagar.arafa.tech@gmail.com">Get in touch <span aria-hidden="true">↗</span></a></div>
+    <!-- ============ PATH ============ -->
+    <section class="section" id="path" data-theme="light">
+      <div class="wrap split">
+        <div class="split__head">
+          <h2 class="h2">Path</h2>
+          <p class="split__note">Mathematics first, then teaching, now data engineering.</p>
         </div>
-        <div class="contact-footer">
-          <div class="contact-links">
-            <a class="magnetic" href="mailto:hagar.arafa.tech@gmail.com">Email <span aria-hidden="true">↗</span></a>
-            <a class="magnetic" href="https://www.linkedin.com/in/hagar-arafa-413707416/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-            <a class="magnetic" href="https://github.com/hegererefe111-debug" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-            <a class="magnetic" href="assets/Hagar-Arafa-CV.pdf" download>CV <span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="footer-meta"><span>HAGAR ARAFA / JUNIOR DATA ENGINEER</span><span>© 2026</span></div>
+
+        <div class="split__body">
+          <ol class="path" id="pathList">
+            <li class="path__item">
+              <p class="path__when">2026 to now</p>
+              <h3 class="path__title">DEPI, Data Engineering Track</h3>
+              <p class="path__text">Digital Egypt Pioneers Initiative. Practical training in Python, SQL and T-SQL, database design, data processing, APIs and ETL concepts.</p>
+            </li>
+            <li class="path__item">
+              <p class="path__when">About 2 years</p>
+              <h3 class="path__title">Online Mathematics Teacher</h3>
+              <p class="path__text">Delivered online lessons, managed instructional activities, monitored learner progress and used performance analysis to identify learning gaps.</p>
+            </li>
+            <li class="path__item">
+              <p class="path__when">2021 to 2025</p>
+              <h3 class="path__title">B.Sc. in General Mathematics</h3>
+              <p class="path__text">Faculty of Education, Kafrelsheikh University.</p>
+            </li>
+            <li class="path__item">
+              <p class="path__when">Diploma</p>
+              <h3 class="path__title">Teacher Preparation Diploma in Mathematics</h3>
+              <p class="path__text">One-year programme at AASTMT, Alexandria.</p>
+            </li>
+          </ol>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section section--dark contact" id="contact" data-theme="dark">
+      <canvas class="contact__field" id="field2" aria-hidden="true"></canvas>
+      <div class="wrap contact__inner">
+        <h2 class="contact__title">Let’s build something useful.</h2>
+        <p class="contact__lede">I’m open to junior data engineering roles and practical data projects. The quickest way to reach me is email.</p>
+
+        <div class="contact__mail">
+          <a class="mail" id="mail" href="mailto:hagar.arafa.tech@gmail.com">hagar.arafa.tech@gmail.com</a>
+          <button class="copy" id="copyMail" type="button">Copy</button>
+        </div>
+
+        <ul class="contact__links">
+          <li><a class="link link--on-dark" href="https://www.linkedin.com/in/hagar-arafa-413707416/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a class="link link--on-dark" href="https://github.com/hegererefe111-debug" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a class="link link--on-dark" href="assets/Hagar-Arafa-CV.pdf" download>Download CV</a></li>
+        </ul>
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="foot" data-theme="dark">
+    <div class="wrap foot__inner">
+      <p>&copy; <span id="year">2026</span> Hagar Arafa</p>
+      <p>Set in Latin Modern and Inter <span class="qed" aria-hidden="true"></span></p>
+      <a class="foot__top" href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
